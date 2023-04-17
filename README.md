@@ -1,1 +1,1 @@
-# fabric-mod-template
+# Summer Cottage

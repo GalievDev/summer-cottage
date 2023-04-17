@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "id": "template",
+  "id": "sc",
   "version": "${version}",
-  "name": "Template Mod",
-  "description": "Mod Description",
+  "name": "Summer Cottage",
+  "description": "More summer fun :D",
   "authors": [
     "Syorito Hatsuki"
   ],
   "contact": {
-    "homepage": "https://syoritohatsuki.dev/"
+    "homepage": "https://galievdev.github.io/"
   },
   "license": "MIT Licence",
   "icon": "assets/template/icon.png",
@@ -17,7 +17,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "dev.syoritohatsuki.template.TemplateMod"
+        "value": "dev.galiev.sc.SummerCottage"
       }
     ]
   },
