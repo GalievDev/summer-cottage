@@ -35,7 +35,9 @@ class WaterCan(settings: Settings?) : Item(settings) {
         val state = world?.getBlockState(pos)
 
         if (state?.material == Material.WATER){
-            if (NbtHelper.getInt(stack, "Liters") < 1000 && !NbtHelper.getBoolean(stack, "Water")) {
+            NbtHelper.setBoolean(stack, "Water", false)
+
+            if (!NbtHelper.getBoolean(stack, "Water")) {
                 NbtHelper.setInt(stack, "Liters", 100)
             } else {
                 NbtHelper.setBoolean(stack, "Water", true)
@@ -55,7 +57,7 @@ class WaterCan(settings: Settings?) : Item(settings) {
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
         val waterCount = NbtHelper.getInt(stack, "Liters")
         if (Screen.hasShiftDown()) {
-            tooltip?.add(Text.literal("$waterCount/1000 Liters").formatted(Formatting.AQUA))
+            tooltip?.add(Text.literal("$waterCount/100 Liters").formatted(Formatting.AQUA))
         } else {
             tooltip?.add(Text.literal("Press Shift for more info").formatted(Formatting.YELLOW))
         }
