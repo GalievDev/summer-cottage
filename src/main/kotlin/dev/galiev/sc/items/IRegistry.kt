@@ -16,14 +16,14 @@ import net.minecraft.util.Identifier
 
 
 object IRegistry {
-    val WOODEN_WATER_CAN = registerItem("wooden_water_can", WaterCan(FabricItemSettings()))
+    val WATER_CAN = registerItem("water_can", WaterCan(FabricItemSettings()))
 
     private fun registerItem(name: String, item: Item): Item? {
         return Registry.register(Registries.ITEM, Identifier(MOD_ID, name), item)
     }
 
     fun addItemsToItemGroup() {
-        addToItemGroup(SUMMER_COTTAGE, WOODEN_WATER_CAN)
+        addToItemGroup(SUMMER_COTTAGE, WATER_CAN)
     }
 
     private fun addToItemGroup(group: ItemGroup, item: Item?) {
