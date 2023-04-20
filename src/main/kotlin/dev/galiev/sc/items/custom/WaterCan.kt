@@ -2,8 +2,8 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.helper.NbtHelper
+import net.minecraft.block.BlockState
 import net.minecraft.block.CropBlock
-import net.minecraft.block.Fertilizable
 import net.minecraft.block.Material
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
@@ -56,10 +56,16 @@ class WaterCan(settings: Settings?) : Item(settings) {
         val world = context?.world
         val item = context?.stack
         val blockPos = context?.blockPos
-        if (NbtHelper.getBoolean(item, "Liters") && useOnFertilizable(item, world, blockPos)){
+
+        val blocks = ArrayList<BlockPos>()
+
+        blocks.add(BlockPos(blockPos?.x!!, blockPos.y, blockPos.z))
+        blocks.add(BlockPos(blockPos.x.plus(1), blockPos.y, blockPos.z.plus(1)))
+        blocks.add(BlockPos(blockPos.x.plus(2), blockPos.y, blockPos.z.plus(2)))
+
+        if (NbtHelper.getBoolean(item, "Liters") && useOnFertilizable(item, world, blocks)){
             if (!world?.isClient!!) {
-                world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos, 0)
-                context.player?.playSound(SoundEvents.AMBIENT_UNDERWATER_ENTER, 1.0F, 1.0F)
+                world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, blockPos, 0)
             }
             return ActionResult.success(world.isClient)
         }
@@ -67,14 +73,18 @@ class WaterCan(settings: Settings?) : Item(settings) {
         return ActionResult.PASS
     }
 
-    fun useOnFertilizable(stack: ItemStack?, world: World?, pos: BlockPos?): Boolean {
-        var blockState = world?.getBlockState(pos)
-        if (blockState?.block is Fertilizable && (blockState.block as Any as CropBlock).isFertilizable(world, pos, blockState, world?.isClient!!)) {
-            if (world is ServerWorld) {
-                if ((blockState.block as CropBlock).canGrow(world, world.random, pos, blockState)) {
-                    (blockState.block as CropBlock).grow(world, world.random, pos, blockState)
+    fun useOnFertilizable(stack: ItemStack?, world: World?, pos: ArrayList<BlockPos>): Boolean {
+        var blockState: BlockState
+        pos.forEach { block ->
+            blockState = world?.getBlockState(block)!!
+
+            if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, block, blockState, world.isClient)) {
+                if (world is ServerWorld) {
+                    if ((blockState.block as CropBlock).canGrow(world, world.random, block, blockState)) {
+                        (blockState.block as CropBlock).grow(world, world.random, block, blockState)
+                    }
+                    NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - 100)
                 }
-                NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - 100)
             }
             return true
         }
