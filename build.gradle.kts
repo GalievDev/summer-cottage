@@ -1,5 +1,5 @@
-import java.time.format.DateTimeFormatter
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 plugins {
     id("fabric-loom")
@@ -16,6 +16,7 @@ val fabricKotlinVersion: String by project
 val javaVersion = JavaVersion.VERSION_17
 val loaderVersion: String by project
 val minecraftVersion: String by project
+val modId: String by project
 
 val modVersion: String by project
 version = "${DateTimeFormatter.ofPattern("yyyy.MM").format(LocalDateTime.now())}.$modVersion"
@@ -86,5 +87,24 @@ tasks {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
         withSourcesJar()
+    }
+}
+val generatedResources = "src/generated/resources"
+
+sourceSets.main {
+    resources {
+        srcDir(generatedResources)
+    }
+}
+
+loom {
+    runs {
+        create("Data Generation") {
+            client()
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file(generatedResources)}")
+            vmArg("-Dfabric-api.datagen.modid=${modId}")
+            runDir ("build/datagen")
+        }
     }
 }
