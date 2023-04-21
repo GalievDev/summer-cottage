@@ -5,7 +5,7 @@
   "name": "Summer Cottage",
   "description": "More summer fun :D",
   "authors": [
-    "Syorito Hatsuki"
+    "GalievDev"
   ],
   "contact": {
     "homepage": "https://galievdev.github.io/"
@@ -22,7 +22,7 @@
     ]
   },
   "mixins": [
-    "template.mixins.json"
+    "sc.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loaderVersion}",
