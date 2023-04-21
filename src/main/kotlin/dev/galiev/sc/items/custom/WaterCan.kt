@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
+import kotlin.random.Random
 
 class WaterCan(settings: Settings?) : Item(settings) {
     override fun getUseAction(stack: ItemStack?): UseAction {
@@ -82,7 +83,7 @@ class WaterCan(settings: Settings?) : Item(settings) {
                 if ((blockState.block as CropBlock).canGrow(world, world.random, blockPos, blockState)) {
                     (blockState.block as CropBlock).grow(world, world.random, blockPos, blockState)
                 }
-                NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - 100)
+                NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - Random.nextInt(20, 40))
             }
             return true
         }
