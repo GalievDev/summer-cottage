@@ -3,9 +3,7 @@ package dev.galiev.sc.blocks
 import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.blocks.custom.FoldingChair
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.Material
@@ -36,10 +34,8 @@ object BRegistry {
             Registries.ITEM, Identifier(SummerCottage.MOD_ID, name),
             BlockItem(block, FabricItemSettings())
         )
-        ItemGroupEvents.modifyEntriesEvent(group).register(ModifyEntries { entries: FabricItemGroupEntries ->
-            entries.add(
-                item
-            )
+        ItemGroupEvents.modifyEntriesEvent(group).register(ItemGroupEvents.ModifyEntries { entries ->
+            entries.add(item)
         })
         return item
     }
