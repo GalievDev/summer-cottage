@@ -2,7 +2,6 @@ package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
-import dev.galiev.sc.SummerCottage.logger
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -34,7 +33,6 @@ object IRegistry {
     }
 
     fun registerModItems() {
-        logger.info("Registering Mod Items for $MOD_ID")
         addItemsToItemGroup()
     }
 }

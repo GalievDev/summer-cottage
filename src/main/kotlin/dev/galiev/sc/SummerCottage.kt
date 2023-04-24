@@ -1,6 +1,7 @@
 package dev.galiev.sc
 
 import com.mojang.logging.LogUtils
+import dev.galiev.sc.blocks.BRegistry
 import dev.galiev.sc.items.IRegistry
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -18,5 +19,6 @@ object SummerCottage: ModInitializer {
     override fun onInitialize() {
         logger.info("${javaClass.simpleName} initialized with mod-id $MOD_ID")
         IRegistry.registerModItems()
+        BRegistry
     }
 }
