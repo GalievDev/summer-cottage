@@ -70,7 +70,6 @@ class WaterCan(settings: Settings?) : Item(settings) {
             if (!world.isClient) {
                 world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, blockPos, 0)
             }
-            world.addParticle(ParticleTypes.RAIN, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, 0.2, 0.1, 0.3)
             return ActionResult.success(world.isClient)
         }
 
@@ -82,10 +81,12 @@ class WaterCan(settings: Settings?) : Item(settings) {
         val blockState = world.getBlockState(blockPos)
         if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, blockPos, blockState, world.isClient)) {
             if (world is ServerWorld){
-                if ((blockState.block as CropBlock).canGrow(world, world.random, blockPos, blockState)) {
+                if ((blockState.block as CropBlock).canGrow(world, world.random, blockPos, blockState) && NbtHelper.getInt(stack, "Liters") >= 30) {
                     (blockState.block as CropBlock).grow(world, world.random, blockPos, blockState)
+                    NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - Random.nextInt(10, 30))
                 }
-                NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - Random.nextInt(20, 40))
+            } else if (world.isClient) {
+                world.addParticle(ParticleTypes.RAIN, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, 0.2, 0.1, 0.3)
             }
             return true
         }
