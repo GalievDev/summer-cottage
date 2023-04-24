@@ -2,8 +2,10 @@ package dev.galiev.sc
 
 import com.mojang.logging.LogUtils
 import dev.galiev.sc.blocks.BRegistry
+import dev.galiev.sc.events.CropBreak
 import dev.galiev.sc.items.IRegistry
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
@@ -18,6 +20,7 @@ object SummerCottage: ModInitializer {
 
     override fun onInitialize() {
         logger.info("${javaClass.simpleName} initialized with mod-id $MOD_ID")
+        AttackBlockCallback.EVENT.register(CropBreak)
         IRegistry.registerModItems()
         BRegistry
     }
