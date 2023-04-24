@@ -1,11 +1,12 @@
 package dev.galiev.sc.events
 
 import dev.galiev.sc.items.IRegistry
+import dev.galiev.sc.mixin.CropBlockMixin
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback
+import net.minecraft.block.CropBlock
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
@@ -26,10 +27,11 @@ object CropBreak: AttackBlockCallback {
                 player.getEquippedStack(EquipmentSlot.CHEST) == IRegistry.GARDENER_SHIRT?.defaultStack &&
                 player.getEquippedStack(EquipmentSlot.LEGS) == IRegistry.GARDENER_LEGGINGS?.defaultStack){
                 val blockState = world.getBlockState(pos)
-                val items = Items.EGG
-                val stack = ItemStack(items, Random.nextInt(1, 7))
-                player.giveItemStack(stack)
-
+                if ((blockState.block is CropBlock) && (blockState.block as CropBlockMixin).getAgeInvoke(blockState) == 7){
+                    val items = blockState.block
+                    val stack = ItemStack(items, Random.nextInt(1, 7))
+                    player.giveItemStack(stack)
+                }
                 return ActionResult.SUCCESS
             }
         }
