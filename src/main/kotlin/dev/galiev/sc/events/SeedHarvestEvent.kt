@@ -1,47 +1,50 @@
 package dev.galiev.sc.events
 
+import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.items.IRegistry
-import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.block.Block
+import net.minecraft.block.BlockState
 import net.minecraft.block.CropBlock
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.ItemEntity
-import net.minecraft.item.BlockItem
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
-object SeedHarvestEvent {
-    fun register(){
-        UseBlockCallback.EVENT.register{ player, world, hand, hitResult ->
-            if (player != null && hand == Hand.MAIN_HAND){
-                val state = world.getBlockState(hitResult.blockPos)
-                val block =  state.block
+object SeedHarvestEvent: PlayerBlockBreakEvents.After {
+    override fun afterBlockBreak(
+        world: World?,
+        player: PlayerEntity?,
+        pos: BlockPos?,
+        state: BlockState?,
+        blockEntity: BlockEntity?
+    ) {
+        if (player != null){
+            val block =  state?.block
 
-                if (block is CropBlock){
-                    val helmet = player.getEquippedStack(EquipmentSlot.HEAD)
-                    val chest = player.getEquippedStack(EquipmentSlot.CHEST)
-                    val legs = player.getEquippedStack(EquipmentSlot.LEGS)
+            if (block is CropBlock){
+                val helmet = player.getEquippedStack(EquipmentSlot.HEAD)
+                val chest = player.getEquippedStack(EquipmentSlot.CHEST)
+                val legs = player.getEquippedStack(EquipmentSlot.LEGS)
 
-                    if (helmet == IRegistry.GARDENER_HAT?.defaultStack && chest == IRegistry.GARDENER_SHIRT?.defaultStack && legs == IRegistry.GARDENER_LEGGINGS?.defaultStack){
-                        val drops = Block.getDroppedStacks(state, world as ServerWorld, hitResult.blockPos, null, player, player.mainHandStack)
+                if (helmet == IRegistry.GARDENER_HAT?.defaultStack && chest == IRegistry.GARDENER_SHIRT?.defaultStack && legs == IRegistry.GARDENER_LEGGINGS?.defaultStack){
+                    val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player.mainHandStack)
 
-                        for (drop in drops){
-                            if (drop.item is BlockItem) {
-                                val count = drop.count
-                                drop.count = count * 2
-                            }
+                    for (drop in drops){
+                        val count = drop.count
+                        drop.count = count * 2
+                        SummerCottage.logger.info("Drops: $drop")
 
-                            world.spawnEntity(ItemEntity(world, hitResult.blockPos.x.toDouble(), hitResult.blockPos.y.toDouble(), hitResult.blockPos.z.toDouble(), drop))
-                        }
 
-                        world.breakBlock(hitResult.blockPos, false, player)
-                        return@register ActionResult.SUCCESS
+                        world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
                     }
+
+                    world.breakBlock(pos, false, player)
                 }
             }
-
-            ActionResult.PASS
         }
     }
 }
