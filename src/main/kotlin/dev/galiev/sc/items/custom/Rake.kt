@@ -1,5 +1,6 @@
 package dev.galiev.sc.items.custom
 
+import dev.galiev.sc.events.SeedHarvestEvent
 import dev.galiev.sc.mixin.CropBlockMixin
 import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
@@ -58,6 +59,7 @@ class Rake(material: ToolMaterial?, attackDamage: Int, attackSpeed: Float, setti
 
             if (!world.isClient && player != null){
                 context.stack.damage(Random.nextInt(2, 9), player) { p: PlayerEntity -> p.sendToolBreakStatus(context.hand) }
+                SeedHarvestEvent.afterBlockBreak(world, player, pos, blockState, null)
             }
 
             return ActionResult.success(world.isClient)

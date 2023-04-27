@@ -1,7 +1,7 @@
 package dev.galiev.sc.events
 
-import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.items.IRegistry
+import dev.galiev.sc.mixin.CropBlockMixin
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -22,28 +22,25 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
         state: BlockState?,
         blockEntity: BlockEntity?
     ) {
-        if (player != null){
-            val block =  state?.block
 
-            if (block is CropBlock){
-                val helmet = player.getEquippedStack(EquipmentSlot.HEAD)
-                val chest = player.getEquippedStack(EquipmentSlot.CHEST)
-                val legs = player.getEquippedStack(EquipmentSlot.LEGS)
+        val block = state?.block
 
-                if (helmet == IRegistry.GARDENER_HAT?.defaultStack && chest == IRegistry.GARDENER_SHIRT?.defaultStack && legs == IRegistry.GARDENER_LEGGINGS?.defaultStack){
-                    val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player.mainHandStack)
+        if (block is CropBlock && (block as CropBlockMixin).getAgeInvoke(state) == 7) {
+            val helmet = player?.getEquippedStack(EquipmentSlot.HEAD)?.item
+            val chest = player?.getEquippedStack(EquipmentSlot.CHEST)?.item
+            val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item
 
-                    for (drop in drops){
-                        val count = drop.count
-                        drop.count = count * 2
-                        SummerCottage.logger.info("Drops: $drop")
+            if (helmet == IRegistry.GARDENER_HAT && chest == IRegistry.GARDENER_SHIRT && legs == IRegistry.GARDENER_LEGGINGS) {
+                val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player?.mainHandStack)
 
+                for (drop in drops) {
+                    val count = drop.count
+                    drop.count = count * 2
 
-                        world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
-                    }
-
-                    world.breakBlock(pos, false, player)
+                    world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
                 }
+
+                world.breakBlock(pos, false, player)
             }
         }
     }
