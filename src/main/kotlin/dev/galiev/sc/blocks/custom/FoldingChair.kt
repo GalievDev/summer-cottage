@@ -1,11 +1,11 @@
 package dev.galiev.sc.blocks.custom
 
+import dev.galiev.sc.entity.ChairEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Material
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.vehicle.BoatEntity
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -23,8 +23,8 @@ class FoldingChair(settings: Settings = FabricBlockSettings.of(Material.WOOD).no
         hit: BlockHitResult?
     ): ActionResult {
         if (!world?.isClient!!){
-            player?.startRiding(BoatEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble()))
+            player?.startRiding(ChairEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble()))
         }
-        return ActionResult.CONSUME
+        return ActionResult.SUCCESS
     }
 }
