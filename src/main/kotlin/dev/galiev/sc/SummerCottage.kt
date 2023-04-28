@@ -5,6 +5,7 @@ import dev.galiev.sc.blocks.BRegistry
 import dev.galiev.sc.events.SeedHarvestEvent
 import dev.galiev.sc.helper.BlocksHelper
 import dev.galiev.sc.items.IRegistry
+import dev.syoritohatsuki.duckyupdater.DuckyUpdater
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -23,6 +24,7 @@ object SummerCottage: ModInitializer {
 
     override fun onInitialize() {
         logger.info("${javaClass.simpleName} initialized with mod-id $MOD_ID")
+        DuckyUpdater.checkForUpdate("eJ2H87hd", MOD_ID)
         IRegistry.registerModItems()
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
         BRegistry
