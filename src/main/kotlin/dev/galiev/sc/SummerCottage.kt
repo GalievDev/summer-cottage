@@ -3,10 +3,13 @@ package dev.galiev.sc
 import com.mojang.logging.LogUtils
 import dev.galiev.sc.blocks.BRegistry
 import dev.galiev.sc.events.SeedHarvestEvent
+import dev.galiev.sc.helper.BlocksHelper
 import dev.galiev.sc.items.IRegistry
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
+import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
@@ -23,6 +26,14 @@ object SummerCottage: ModInitializer {
         IRegistry.registerModItems()
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
         BRegistry
-        //BlocksHelper
+        BlocksHelper
+    }
+
+    fun addAllToGroup(item: Item) {
+        ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register(ItemGroupEvents.ModifyEntries { entries ->
+            entries.add(
+                item
+            )
+        })
     }
 }
