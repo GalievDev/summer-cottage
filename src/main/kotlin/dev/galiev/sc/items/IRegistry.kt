@@ -28,7 +28,7 @@ object IRegistry {
         return Registry.register(Registries.ITEM, Identifier(MOD_ID, name), item)
     }
 
-    fun addItemsToItemGroup() {
+    private fun addItemsToItemGroup() {
         addToItemGroup(WATER_CAN)
         addToItemGroup(RAKE)
         addToItemGroup(GARDENER_HAT)
