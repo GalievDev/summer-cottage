@@ -3,14 +3,13 @@ package dev.galiev.sc.items.clothes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class GardenerLeggings: ArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, FabricItemSettings()) {
+class GardenerLeggings: ClothArmorItem(ArmorMaterials.LEATHER, Type.LEGGINGS, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,

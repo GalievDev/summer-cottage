@@ -16,5 +16,8 @@ class SCModelProvider(output: FabricDataOutput?) : FabricModelProvider(output) {
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator?) {
         itemModelGenerator?.register(IRegistry.RAKE, Models.GENERATED)
         itemModelGenerator?.register(IRegistry.WATER_CAN, Models.GENERATED)
+        itemModelGenerator?.register(IRegistry.GARDENER_HAT, Models.GENERATED)
+        itemModelGenerator?.register(IRegistry.GARDENER_SHIRT, Models.GENERATED)
+        itemModelGenerator?.register(IRegistry.GARDENER_LEGGINGS, Models.GENERATED)
     }
 }
