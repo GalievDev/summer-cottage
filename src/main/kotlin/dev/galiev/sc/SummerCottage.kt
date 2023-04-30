@@ -2,7 +2,6 @@ package dev.galiev.sc
 
 import com.mojang.logging.LogUtils
 import dev.galiev.sc.blocks.BRegistry
-import dev.galiev.sc.entity.ChairEntity
 import dev.galiev.sc.events.SeedHarvestEvent
 import dev.galiev.sc.helper.BlocksHelper
 import dev.galiev.sc.items.IRegistry
@@ -13,8 +12,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 
@@ -32,7 +29,6 @@ object SummerCottage: ModInitializer {
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
         BRegistry
         BlocksHelper
-        Registry.register(Registries.ENTITY_TYPE, Identifier(MOD_ID, "chair_entity_type"), ChairEntity.CHAIR_ENTITY_TYPE)
     }
 
     fun addAllToGroup(item: Item) {

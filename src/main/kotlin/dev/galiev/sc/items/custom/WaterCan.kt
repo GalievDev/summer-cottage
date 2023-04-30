@@ -2,6 +2,7 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.helper.NbtHelper
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.CropBlock
 import net.minecraft.block.Material
 import net.minecraft.client.gui.screen.Screen
@@ -23,7 +24,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 import kotlin.random.Random
 
-class WaterCan(settings: Settings?) : Item(settings) {
+class WaterCan() : Item(FabricItemSettings()) {
     override fun getUseAction(stack: ItemStack?): UseAction {
         return UseAction.BOW
     }
@@ -76,7 +77,7 @@ class WaterCan(settings: Settings?) : Item(settings) {
         return ActionResult.PASS
     }
 
-    fun useOnFertilizable(x: Int, y: Int, z: Int, world: World, stack: ItemStack): Boolean {
+    private fun useOnFertilizable(x: Int, y: Int, z: Int, world: World, stack: ItemStack): Boolean {
         val blockPos: BlockPos.Mutable = BlockPos.Mutable(x,y,z)
         val blockState = world.getBlockState(blockPos)
         if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, blockPos, blockState, world.isClient)) {

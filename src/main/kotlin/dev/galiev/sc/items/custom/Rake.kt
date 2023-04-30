@@ -2,11 +2,12 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.events.SeedHarvestEvent
 import dev.galiev.sc.mixin.CropBlockMixin
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.HoeItem
 import net.minecraft.item.ItemUsageContext
-import net.minecraft.item.ToolMaterial
+import net.minecraft.item.ToolMaterials
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -15,7 +16,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.random.Random
 
-class Rake(material: ToolMaterial?, attackDamage: Int, attackSpeed: Float, settings: Settings?) : HoeItem(material, attackDamage, attackSpeed, settings) {
+class Rake() : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
     override fun useOnBlock(context: ItemUsageContext?): ActionResult {
         val world = context?.world
         val pos = context?.blockPos
@@ -68,7 +69,7 @@ class Rake(material: ToolMaterial?, attackDamage: Int, attackSpeed: Float, setti
         return ActionResult.PASS
     }
 
-    fun breakBlocks(x: Int, y: Int, z: Int, world: World) {
+    private fun breakBlocks(x: Int, y: Int, z: Int, world: World) {
         val pos: BlockPos.Mutable = BlockPos.Mutable(x,y,z)
         val blockState = world.getBlockState(pos)
         if (blockState.isIn(BlockTags.CROPS) && (blockState.block as CropBlockMixin).getAgeInvoke(blockState) == 7){
@@ -76,7 +77,7 @@ class Rake(material: ToolMaterial?, attackDamage: Int, attackSpeed: Float, setti
         }
     }
 
-    fun setBlocks(x: Int, y: Int, z: Int, world: World) {
+    private fun setBlocks(x: Int, y: Int, z: Int, world: World) {
         val pos: BlockPos.Mutable = BlockPos.Mutable(x,y,z)
         val blockState = world.getBlockState(pos)
         if(blockState.isIn(BlockTags.DIRT)){
