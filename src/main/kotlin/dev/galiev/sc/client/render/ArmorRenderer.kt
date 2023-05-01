@@ -48,9 +48,9 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
             matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0f))
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f))
 
-            val modelHead = ModelIdentifier("summer-cottage", head.name.toString(), "inventory")
-            val modelChest = ModelIdentifier("summer-cottage", chest.name.toString(), "inventory")
-            val modelLegs = ModelIdentifier("summer-cottage", legs.name.toString(), "inventory")
+            val modelHead = ModelIdentifier("sc", head.name.string, "inventory")
+            val modelChest = ModelIdentifier("sc", chest.name.string, "inventory")
+            val modelLegs = ModelIdentifier("sc", legs.name.string, "inventory")
             itemRenderer.renderItem(
                 head,
                 ModelTransformationMode.NONE,
