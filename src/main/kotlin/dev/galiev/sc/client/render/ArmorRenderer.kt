@@ -1,7 +1,6 @@
 package dev.galiev.sc.client.render
 
 import dev.galiev.sc.items.clothes.ClothArmorItem
-import jdk.vm.ci.code.Location.stack
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
@@ -37,31 +36,52 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
         val biped = contextModel
 
         if (head?.item is ClothArmorItem && chest?.item is ClothArmorItem && legs?.item is ClothArmorItem) {
-            val hat = head.item as ClothArmorItem
-            val itemRenderer: ItemRenderer = MinecraftClient.getInstance().getItemRenderer()
-            val height: Double = hat.getHeight()
-            val size: Float = hat.getSize()
+            val itemRenderer: ItemRenderer = MinecraftClient.getInstance().itemRenderer
+            val height: Double = 0.2
+            val size: Float = 1.15F
 
             matrices!!.push()
             biped!!.head.rotate(matrices)
-            matrices!!.translate(0.0, -1.0, 0.0)
-            matrices!!.translate(0.0, -height, 0.0)
-            matrices!!.scale(size, size, size)
-            matrices!!.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0f))
-            matrices!!.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f))
+            matrices.translate(0.0, -1.0, 0.0)
+            matrices.translate(0.0, -height, 0.0)
+            matrices.scale(size, size, size)
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0f))
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f))
 
-            val model = ModelIdentifier("villager-hats", hat.getHatName(), "inventory")
+            val modelHead = ModelIdentifier("summer-cottage", head.item.name.toString(), "inventory")
+            val modelChest = ModelIdentifier("summer-cottage", chest.item.name.toString(), "inventory")
+            val modelLegs = ModelIdentifier("summer-cottage", legs.item.name.toString(), "inventory")
             itemRenderer.renderItem(
-                stack,
+                head,
                 ModelTransformationMode.NONE,
                 false,
                 matrices,
                 vertexConsumers,
                 light,
                 OverlayTexture.DEFAULT_UV,
-                itemRenderer.models.modelManager.getModel(model)
+                itemRenderer.models.modelManager.getModel(modelHead)
             )
-            matrices!!.pop()
+            itemRenderer.renderItem(
+                head,
+                ModelTransformationMode.NONE,
+                false,
+                matrices,
+                vertexConsumers,
+                light,
+                OverlayTexture.DEFAULT_UV,
+                itemRenderer.models.modelManager.getModel(modelChest)
+            )
+            itemRenderer.renderItem(
+                head,
+                ModelTransformationMode.NONE,
+                false,
+                matrices,
+                vertexConsumers,
+                light,
+                OverlayTexture.DEFAULT_UV,
+                itemRenderer.models.modelManager.getModel(modelLegs)
+            )
+            matrices.pop()
         }
     }
 
