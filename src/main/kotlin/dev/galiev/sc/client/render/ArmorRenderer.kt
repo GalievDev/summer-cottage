@@ -42,6 +42,11 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
 
             matrices!!.push()
             biped!!.head.rotate(matrices)
+            biped.body.rotate(matrices)
+            biped.rightArm.rotate(matrices)
+            biped.leftArm.rotate(matrices)
+            biped.rightLeg.rotate(matrices)
+            biped.leftLeg.rotate(matrices)
             matrices.translate(0.0, -1.0, 0.0)
             matrices.translate(0.0, -height, 0.0)
             matrices.scale(size, size, size)
