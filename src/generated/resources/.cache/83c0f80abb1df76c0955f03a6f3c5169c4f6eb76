@@ -1,9 +1,7 @@
-// 1.19.4	2023-04-30T14:13:39.1447852	Summer Cottage/Model Definitions
+// 1.19.4	2023-05-07T13:37:55.6784759	Summer Cottage/Model Definitions
 d7d703e4cbfc4c65b4c6873f490cc32d90a71264 assets\sc\blockstates\folding_chair.json
 50219ef714fab2e17f4986d5662d1c41dceacb77 assets\sc\models\item\folding_chair.json
 195c69fb457f6ed1522240ce6676686d5e497801 assets\sc\models\block\folding_chair.json
 e3886536772028c902803b1d23464b3182eff15b assets\sc\models\item\gardener_hat.json
 5617520c946bb5df08688eb35dca41aa665895cd assets\sc\models\item\gardener_leggings.json
 810f2f8a529f238fab83892aba2478564a25a298 assets\sc\models\item\gardener_shirt.json
-eb4c9299d8cb4924806bf7cf1a7c62fad08613a6 assets\sc\models\item\rake.json
-20e3190370ff570135f0e3aa36c345d396647018 assets\sc\models\item\water_can.json
