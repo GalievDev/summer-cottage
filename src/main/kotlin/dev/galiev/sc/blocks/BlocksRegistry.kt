@@ -10,7 +10,7 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 
-object BRegistry {
+object BlocksRegistry {
     private val BLOCKS: MutableMap<Block, Identifier> = LinkedHashMap()
 
     val FOLDING_CHAIR = FoldingChair().create("folding_chair")

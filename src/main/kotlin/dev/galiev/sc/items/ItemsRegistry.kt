@@ -14,7 +14,7 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 
-object IRegistry {
+object ItemsRegistry {
     val WATER_CAN = registerItem("water_can", WaterCan())
     val RAKE = registerItem("rake", Rake())
 

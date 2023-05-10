@@ -1,6 +1,6 @@
 package dev.galiev.sc.data
 
-import dev.galiev.sc.items.IRegistry
+import dev.galiev.sc.items.ItemsRegistry
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.data.server.recipe.RecipeJsonProvider
@@ -14,7 +14,7 @@ import java.util.function.Consumer
 class SCRecipeGenerator(output: FabricDataOutput?) : FabricRecipeProvider(output) {
     override fun generate(exporter: Consumer<RecipeJsonProvider>?) {
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, IRegistry.RAKE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ItemsRegistry.RAKE)
             .pattern("NNN")
             .pattern("ISI")
             .pattern("ASA")
@@ -38,9 +38,9 @@ class SCRecipeGenerator(output: FabricDataOutput?) : FabricRecipeProvider(output
                 hasItem(Items.AIR),
                 conditionsFromItem(Items.AIR)
             )
-            .offerTo(exporter, Identifier(getRecipeName(IRegistry.RAKE)))
+            .offerTo(exporter, Identifier(getRecipeName(ItemsRegistry.RAKE)))
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, IRegistry.WATER_CAN)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ItemsRegistry.WATER_CAN)
             .pattern("AAA")
             .pattern("IBI")
             .pattern("III")
@@ -59,6 +59,6 @@ class SCRecipeGenerator(output: FabricDataOutput?) : FabricRecipeProvider(output
                 hasItem(Items.BUCKET),
                 RecipeProvider.conditionsFromItem(Items.BUCKET)
             )
-            .offerTo(exporter, Identifier(getRecipeName(IRegistry.WATER_CAN)))
+            .offerTo(exporter, Identifier(getRecipeName(ItemsRegistry.WATER_CAN)))
     }
 }

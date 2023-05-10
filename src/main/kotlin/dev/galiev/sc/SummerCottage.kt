@@ -1,10 +1,11 @@
 package dev.galiev.sc
 
 import com.mojang.logging.LogUtils
-import dev.galiev.sc.blocks.BRegistry
+import dev.galiev.sc.blocks.BlocksRegistry
 import dev.galiev.sc.events.SeedHarvestEvent
 import dev.galiev.sc.helper.BlocksHelper
-import dev.galiev.sc.items.IRegistry
+import dev.galiev.sc.helper.EntityTypeRegistry
+import dev.galiev.sc.items.ItemsRegistry
 import dev.syoritohatsuki.duckyupdater.DuckyUpdater
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
@@ -20,15 +21,16 @@ object SummerCottage: ModInitializer {
     const val MOD_ID = "sc"
     val logger: Logger = LogUtils.getLogger()
 
-    val SUMMER_COTTAGE: ItemGroup = FabricItemGroup.builder(Identifier(MOD_ID)).icon { IRegistry.WATER_CAN?.asItem()?.defaultStack }.build()
+    val SUMMER_COTTAGE: ItemGroup = FabricItemGroup.builder(Identifier(MOD_ID)).icon { ItemsRegistry.WATER_CAN?.asItem()?.defaultStack }.build()
 
     override fun onInitialize() {
         logger.info("${javaClass.simpleName} initialized with mod-id $MOD_ID")
-        DuckyUpdater.checkForUpdate("eJ2H87hd", MOD_ID)
-        IRegistry.registerModItems()
-        PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
-        BRegistry
+        ItemsRegistry.registerModItems()
+        BlocksRegistry
+        EntityTypeRegistry
         BlocksHelper
+        PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
+        DuckyUpdater.checkForUpdate("eJ2H87hd", MOD_ID)
     }
 
     fun addAllToGroup(item: Item) {
