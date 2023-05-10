@@ -15,7 +15,7 @@ object EntityTypeRegistry {
         Registry.register(
             Registries.ENTITY_TYPE,
             Identifier(SummerCottage.MOD_ID, "chair_entity"),
-            FabricEntityTypeBuilder.create<ChairEntity>(SpawnGroup.MISC, ::ChairEntity)
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ChairEntity)
                 .dimensions(EntityDimensions.fixed(0.001F, 0.001F)).build()
         )
 }
