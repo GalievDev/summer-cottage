@@ -38,7 +38,7 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
         if (head?.item is ClothArmorItem && chest?.item is ClothArmorItem && legs?.item is ClothArmorItem) {
             val itemRenderer: ItemRenderer = MinecraftClient.getInstance().itemRenderer
             val height: Double = 0.2
-            val size: Float = 1.15F
+            val size: Float = 1.1F
 
             matrices!!.push()
             biped!!.head.rotate(matrices)
@@ -56,6 +56,7 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
             val modelHead = ModelIdentifier("sc", head.name.string, "inventory")
             val modelChest = ModelIdentifier("sc", chest.name.string, "inventory")
             val modelLegs = ModelIdentifier("sc", legs.name.string, "inventory")
+
             itemRenderer.renderItem(
                 head,
                 ModelTransformationMode.NONE,
@@ -66,8 +67,9 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
                 OverlayTexture.DEFAULT_UV,
                 itemRenderer.models.modelManager.getModel(modelHead)
             )
+
             itemRenderer.renderItem(
-                head,
+                chest,
                 ModelTransformationMode.NONE,
                 false,
                 matrices,
@@ -76,8 +78,9 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
                 OverlayTexture.DEFAULT_UV,
                 itemRenderer.models.modelManager.getModel(modelChest)
             )
+
             itemRenderer.renderItem(
-                head,
+                legs,
                 ModelTransformationMode.NONE,
                 false,
                 matrices,
@@ -86,6 +89,7 @@ class ArmorRenderer<T: PlayerEntity?, M: PlayerEntityModel<T>?>(context: Feature
                 OverlayTexture.DEFAULT_UV,
                 itemRenderer.models.modelManager.getModel(modelLegs)
             )
+
             matrices.pop()
         }
     }
