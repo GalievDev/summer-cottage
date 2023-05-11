@@ -9,11 +9,12 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntityTypeRegistry.CHAIR_ENTITY, world) {
 
+class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntityTypeRegistry.CHAIR_ENTITY, world) {
     constructor(world: World?) : this(EntityTypeRegistry.CHAIR_ENTITY, world) {
         noClip = true
     }
@@ -27,11 +28,19 @@ class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntityT
             val x = this.blockPos.x
             val y = this.blockPos.y
             val z = this.blockPos.z
-
-            return Vec3d(x + 0.5, y + 0.5, z + 0.5)
+            val pos = OCCUPIED.remove(Vec3d(x.toDouble(), y.toDouble(), z.toDouble()))
+            if (pos != null) {
+                remove(RemovalReason.DISCARDED)
+                return Vec3d(x + 0.5, y + 0.5, z + 0.5)
+            }
         }
-
+        remove(RemovalReason.DISCARDED)
         return super.updatePassengerForDismount(passenger)
+    }
+
+    override fun remove(reason: RemovalReason?) {
+        OCCUPIED.remove(pos)
+        super.remove(reason)
     }
 
     override fun initDataTracker() {
@@ -41,5 +50,9 @@ class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntityT
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound?) {
+    }
+
+    companion object {
+        val OCCUPIED = HashMap<Vec3d, BlockPos>()
     }
 }
