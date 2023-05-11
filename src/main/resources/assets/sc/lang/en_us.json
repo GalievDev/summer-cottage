@@ -1,5 +1,7 @@
 {
   "item.sc.water_can": "Water Can",
   "item.sc.rake": "Rake",
-  "text.gardener_set": "Full Gardener's Clothes gives double loot from plants"
+  "text.press_shift": "Press Shift for more info",
+  "text.gardener_set": "Full Gardener's Clothes gives double loot from plants",
+  "text.flip_flops": "No slowdown on soul sand and mud"
 }
