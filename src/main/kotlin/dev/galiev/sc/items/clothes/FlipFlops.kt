@@ -9,19 +9,18 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class GardenerHat() : ClothArmorItem(ArmorMaterials.LEATHER, Type.HELMET, FabricItemSettings()) {
+class FlipFlops() : ClothArmorItem(ArmorMaterials.LEATHER, Type.BOOTS, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,
         tooltip: MutableList<Text>?,
         context: TooltipContext?
     ) {
-        if (Screen.hasShiftDown()){
-            tooltip?.add(Text.translatable("text.gardener_set").formatted(Formatting.GREEN))
+        if (Screen.hasShiftDown()) {
+            tooltip?.add(Text.translatable("text.flip_flops").formatted(Formatting.GREEN))
         } else {
             tooltip?.add(Text.translatable("text.press_shift").formatted(Formatting.YELLOW))
         }
-
         super.appendTooltip(stack, world, tooltip, context)
     }
 }

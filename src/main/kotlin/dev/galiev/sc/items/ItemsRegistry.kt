@@ -2,6 +2,7 @@ package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
+import dev.galiev.sc.items.clothes.FlipFlops
 import dev.galiev.sc.items.clothes.GardenerHat
 import dev.galiev.sc.items.clothes.GardenerLeggings
 import dev.galiev.sc.items.clothes.GardenerShirt
@@ -15,7 +16,9 @@ import net.minecraft.util.Identifier
 
 
 object ItemsRegistry {
+
     val WATER_CAN = registerItem("water_can", WaterCan())
+
     val RAKE = registerItem("rake", Rake())
 
     val GARDENER_HAT = registerItem("gardener_hat", GardenerHat())
@@ -23,6 +26,8 @@ object ItemsRegistry {
     val GARDENER_SHIRT = registerItem("gardener_shirt", GardenerShirt())
 
     val GARDENER_LEGGINGS = registerItem("gardener_leggings", GardenerLeggings())
+
+    val FLIP_FLOPS = registerItem("flip_flops", FlipFlops())
 
     private fun registerItem(name: String, item: Item): Item? {
         return Registry.register(Registries.ITEM, Identifier(MOD_ID, name), item)
@@ -34,6 +39,7 @@ object ItemsRegistry {
         addToItemGroup(GARDENER_HAT)
         addToItemGroup(GARDENER_SHIRT)
         addToItemGroup(GARDENER_LEGGINGS)
+        addToItemGroup(FLIP_FLOPS)
     }
 
     private fun addToItemGroup(item: Item?) {
