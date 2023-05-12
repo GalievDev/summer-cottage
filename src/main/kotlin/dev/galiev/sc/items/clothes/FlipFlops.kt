@@ -8,7 +8,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class FlipFlops() : ClothArmorItem(Type.BOOTS, FabricItemSettings()) {
+class FlipFlops() : RubberArmorItem(Type.BOOTS, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,
