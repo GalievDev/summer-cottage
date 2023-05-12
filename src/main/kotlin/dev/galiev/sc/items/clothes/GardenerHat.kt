@@ -1,15 +1,15 @@
 package dev.galiev.sc.items.clothes
 
+import dev.galiev.sc.items.materials.Materials
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class GardenerHat() : ClothArmorItem(ArmorMaterials.LEATHER, Type.HELMET, FabricItemSettings()) {
+class GardenerHat() : ClothArmorItem(Type.HELMET, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,

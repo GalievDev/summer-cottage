@@ -35,7 +35,7 @@ class ClothMaterial: ArmorMaterial {
     }
 
     override fun getToughness(): Float {
-        return 0.1F
+        return 0F
     }
 
     override fun getKnockbackResistance(): Float {

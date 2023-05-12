@@ -1,7 +1,7 @@
 package dev.galiev.sc.items.clothes
 
+import dev.galiev.sc.items.materials.Materials
 import net.minecraft.item.ArmorItem
-import net.minecraft.item.ArmorMaterial
 
-open class ClothArmorItem(material: ArmorMaterial?, type: Type?, settings: Settings?) : ArmorItem(material, type, settings) {
+open class ClothArmorItem(type: Type?, settings: Settings?) : ArmorItem(Materials.CLOTH_ARMOR_MATERIAL, type, settings) {
 }

@@ -8,9 +8,7 @@ import dev.galiev.sc.items.clothes.GardenerLeggings
 import dev.galiev.sc.items.clothes.GardenerShirt
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
-import dev.galiev.sc.items.materials.ClothMaterial
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
-import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -22,8 +20,6 @@ object ItemsRegistry {
     val WATER_CAN = registerItem("water_can", WaterCan())
 
     val RAKE = registerItem("rake", Rake())
-
-    val CLOTH_MATERIAL = registerItem("cloth_material", ClothMaterial())
 
     val GARDENER_HAT = registerItem("gardener_hat", GardenerHat())
 
