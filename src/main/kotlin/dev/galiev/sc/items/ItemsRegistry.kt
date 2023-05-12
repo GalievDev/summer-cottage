@@ -2,10 +2,13 @@ package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
-import dev.galiev.sc.items.clothes.FlipFlops
-import dev.galiev.sc.items.clothes.GardenerHat
-import dev.galiev.sc.items.clothes.GardenerLeggings
-import dev.galiev.sc.items.clothes.GardenerShirt
+import dev.galiev.sc.items.clothes.fisherman.FishermanHat
+import dev.galiev.sc.items.clothes.fisherman.FishermanLeggings
+import dev.galiev.sc.items.clothes.fisherman.FishermanShirt
+import dev.galiev.sc.items.clothes.fisherman.FlipFlops
+import dev.galiev.sc.items.clothes.gardener.GardenerHat
+import dev.galiev.sc.items.clothes.gardener.GardenerLeggings
+import dev.galiev.sc.items.clothes.gardener.GardenerShirt
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -27,6 +30,12 @@ object ItemsRegistry {
 
     val GARDENER_LEGGINGS = registerItem("gardener_leggings", GardenerLeggings())
 
+    val FISHERMAN_HAT = registerItem("fisherman_hat", FishermanHat())
+
+    val FISHERMAN_SHIRT = registerItem("fisherman_shirt", FishermanShirt())
+
+    val FISHERMAN_LEGGINGS = registerItem("fisherman_leggings", FishermanLeggings())
+
     val FLIP_FLOPS = registerItem("flip_flops", FlipFlops())
 
     private fun registerItem(name: String, item: Item): Item? {
@@ -39,6 +48,9 @@ object ItemsRegistry {
         addToItemGroup(GARDENER_HAT)
         addToItemGroup(GARDENER_SHIRT)
         addToItemGroup(GARDENER_LEGGINGS)
+        addToItemGroup(FISHERMAN_HAT)
+        addToItemGroup(FISHERMAN_SHIRT)
+        addToItemGroup(FISHERMAN_LEGGINGS)
         addToItemGroup(FLIP_FLOPS)
     }
 

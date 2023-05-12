@@ -1,5 +1,6 @@
-package dev.galiev.sc.items.clothes
+package dev.galiev.sc.items.clothes.fisherman
 
+import dev.galiev.sc.items.clothes.RubberArmorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
@@ -8,7 +9,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class FlipFlops() : RubberArmorItem(Type.BOOTS, FabricItemSettings()) {
+class FishermanLeggings() : RubberArmorItem(Type.LEGGINGS, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,
@@ -16,7 +17,7 @@ class FlipFlops() : RubberArmorItem(Type.BOOTS, FabricItemSettings()) {
         context: TooltipContext?
     ) {
         if (Screen.hasShiftDown()) {
-            tooltip?.add(Text.translatable("text.flip_flops").formatted(Formatting.GREEN))
+            tooltip?.add(Text.translatable("text.fisherman_set").formatted(Formatting.GREEN))
         } else {
             tooltip?.add(Text.translatable("text.press_shift").formatted(Formatting.YELLOW))
         }

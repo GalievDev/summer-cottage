@@ -1,6 +1,6 @@
 package dev.galiev.sc.mixin;
 
-import dev.galiev.sc.items.clothes.GardenerHat;
+import dev.galiev.sc.items.clothes.gardener.GardenerHat;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;

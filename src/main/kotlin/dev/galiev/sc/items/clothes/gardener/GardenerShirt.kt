@@ -1,6 +1,6 @@
-package dev.galiev.sc.items.clothes
+package dev.galiev.sc.items.clothes.gardener
 
-import dev.galiev.sc.items.materials.Materials
+import dev.galiev.sc.items.clothes.ClothArmorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext

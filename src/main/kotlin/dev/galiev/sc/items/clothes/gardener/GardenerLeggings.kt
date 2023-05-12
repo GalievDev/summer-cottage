@@ -1,6 +1,6 @@
-package dev.galiev.sc.items.clothes
+package dev.galiev.sc.items.clothes.gardener
 
-import dev.galiev.sc.items.materials.Materials
+import dev.galiev.sc.items.clothes.ClothArmorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
@@ -9,7 +9,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class GardenerHat() : ClothArmorItem(Type.HELMET, FabricItemSettings()) {
+class GardenerLeggings: ClothArmorItem(Type.LEGGINGS, FabricItemSettings()) {
     override fun appendTooltip(
         stack: ItemStack?,
         world: World?,
@@ -19,7 +19,7 @@ class GardenerHat() : ClothArmorItem(Type.HELMET, FabricItemSettings()) {
         if (Screen.hasShiftDown()){
             tooltip?.add(Text.translatable("text.gardener_set").formatted(Formatting.GREEN))
         } else {
-            tooltip?.add(Text.translatable("text.press_shift").formatted(Formatting.YELLOW))
+            tooltip?.add(Text.literal("Press Shift for more info").formatted(Formatting.YELLOW))
         }
 
         super.appendTooltip(stack, world, tooltip, context)
