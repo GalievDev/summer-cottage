@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import kotlin.random.Random
 
 object SeedHarvestEvent: PlayerBlockBreakEvents.After {
     override fun afterBlockBreak(
@@ -31,16 +32,18 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
             val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item
 
             if (helmet == ItemsRegistry.GARDENER_HAT && chest == ItemsRegistry.GARDENER_SHIRT && legs == ItemsRegistry.GARDENER_LEGGINGS) {
-                val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player?.mainHandStack)
+                if (Random.nextInt(1, 50) == 25) {
+                    val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player?.mainHandStack)
 
-                for (drop in drops) {
-                    val count = drop.count
-                    drop.count = count * 2
+                    for (drop in drops) {
+                        val count = drop.count
+                        drop.count = count * 2
 
-                    world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
+                        world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
+                    }
+
+                    world.breakBlock(pos, false, player)
                 }
-
-                world.breakBlock(pos, false, player)
             }
         }
     }
