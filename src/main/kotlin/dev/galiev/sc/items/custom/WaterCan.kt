@@ -24,7 +24,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 import kotlin.random.Random
 
-class WaterCan() : Item(FabricItemSettings()) {
+class WaterCan() : Item(FabricItemSettings().maxCount(1)) {
     override fun getUseAction(stack: ItemStack?): UseAction {
         return UseAction.BOW
     }

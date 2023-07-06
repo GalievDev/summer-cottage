@@ -42,7 +42,7 @@ dependencies {
 
     modImplementation("net.fabricmc", "fabric-language-kotlin", fabricKotlinVersion)
 
-    include(modImplementation("maven.modrinth", "ducky-updater-legacy", "2023.5.1"))
+    include(modImplementation("maven.modrinth", "ducky-updater-lib", "2023.5.1"))
 }
 
 tasks {
