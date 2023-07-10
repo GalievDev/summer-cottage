@@ -1,7 +1,8 @@
 package dev.galiev.sc.client
 
 import dev.galiev.sc.blocks.custom.entity.ChairEntity
-import dev.galiev.sc.client.render.ArmorRenderer
+import dev.galiev.sc.client.render.HatRender
+import dev.galiev.sc.client.render.ShirtRender
 import dev.galiev.sc.helper.EntityTypeRegistry
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -16,9 +17,10 @@ class SummerCottageClient: ClientModInitializer {
     override fun onInitializeClient() {
         EntityRendererRegistry.register(EntityTypeRegistry.CHAIR_ENTITY, ::EmptyRenderer)
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(LivingEntityFeatureRendererRegistrationCallback
-        { entityType, entityRenderer, registrationHelper, context ->
+        { _, entityRenderer, registrationHelper, _ ->
             if (entityRenderer is PlayerEntityRenderer) {
-                registrationHelper.register(ArmorRenderer(entityRenderer))
+                registrationHelper.register(HatRender(entityRenderer))
+                registrationHelper.register(ShirtRender(entityRenderer))
             }
         })
     }

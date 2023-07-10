@@ -27,6 +27,7 @@ group = mavenGroup
 repositories {
     maven("https://cursemaven.com")
     maven("https://api.modrinth.com/maven")
+    maven ("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
 }
 
 dependencies {
@@ -41,6 +42,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api", "fabric-api", fabricVersion)
 
     modImplementation("net.fabricmc", "fabric-language-kotlin", fabricKotlinVersion)
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.19.4:4.2")
 
     include(modImplementation("maven.modrinth", "ducky-updater-lib", "2023.5.1"))
 }
