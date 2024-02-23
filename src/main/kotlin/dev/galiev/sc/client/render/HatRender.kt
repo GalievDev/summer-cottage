@@ -19,25 +19,15 @@ import net.minecraft.util.math.RotationAxis
 class HatRender<T: PlayerEntity, M: PlayerEntityModel<T>>(context: FeatureRendererContext<T, M>?) : FeatureRenderer<T, M>(
     context
 ) {
-    override fun render(
-        matrices: MatrixStack?,
-        vertexConsumers: VertexConsumerProvider?,
-        light: Int,
-        entity: T,
-        limbAngle: Float,
-        limbDistance: Float,
-        tickDelta: Float,
-        animationProgress: Float,
-        headYaw: Float,
-        headPitch: Float
-    ) {
+    override fun render(matrices: MatrixStack?, vertexConsumers: VertexConsumerProvider?, light: Int, entity: T, limbAngle: Float, limbDistance: Float, tickDelta: Float, animationProgress: Float, headYaw: Float, headPitch: Float) {
         val stack = entity.getEquippedStack(EquipmentSlot.HEAD)
         val biped = this.contextModel
 
         if (stack.item is GardenerHat) {
-            val itemRenderer: ItemRenderer = MinecraftClient.getInstance().getItemRenderer()
+            val itemRenderer: ItemRenderer = MinecraftClient.getInstance().itemRenderer
             val height = 0.1
             val size = 1.55F
+
             matrices!!.push()
             biped.head.rotate(matrices)
             matrices.translate(0.0, -1.0, 0.0)
@@ -45,6 +35,7 @@ class HatRender<T: PlayerEntity, M: PlayerEntityModel<T>>(context: FeatureRender
             matrices.scale(size, size, size)
             matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0f))
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f))
+
             val model = ModelIdentifier("sc", "gardener_hat", "inventory")
             itemRenderer.renderItem(
                 stack,

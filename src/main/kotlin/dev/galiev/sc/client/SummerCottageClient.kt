@@ -16,6 +16,7 @@ import net.minecraft.util.Identifier
 class SummerCottageClient: ClientModInitializer {
     override fun onInitializeClient() {
         EntityRendererRegistry.register(EntityTypeRegistry.CHAIR_ENTITY, ::EmptyRenderer)
+
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(LivingEntityFeatureRendererRegistrationCallback
         { _, entityRenderer, registrationHelper, _ ->
             if (entityRenderer is PlayerEntityRenderer) {
