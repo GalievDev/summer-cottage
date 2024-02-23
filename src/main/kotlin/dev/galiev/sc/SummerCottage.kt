@@ -15,12 +15,14 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
+import kotlin.random.Random
 
 object SummerCottage: ModInitializer {
 
     const val MOD_ID = "sc"
     val logger: Logger = LogUtils.getLogger()
 
+    val RANDOM = Random(System.currentTimeMillis())
     val SUMMER_COTTAGE: ItemGroup = FabricItemGroup.builder(Identifier(MOD_ID)).icon { ItemsRegistry.WATER_CAN?.asItem()?.defaultStack }.build()
 
     override fun onInitialize() {

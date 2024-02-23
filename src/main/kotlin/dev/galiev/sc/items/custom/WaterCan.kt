@@ -1,6 +1,7 @@
 package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage
+import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.helper.NbtHelper
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.CropBlock
@@ -22,7 +23,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
-import kotlin.random.Random
 
 class WaterCan() : Item(FabricItemSettings().maxCount(1)) {
     override fun getUseAction(stack: ItemStack?): UseAction {
@@ -84,7 +84,7 @@ class WaterCan() : Item(FabricItemSettings().maxCount(1)) {
             if (world is ServerWorld){
                 if ((blockState.block as CropBlock).canGrow(world, world.random, blockPos, blockState) && NbtHelper.getInt(stack, "Liters") >= 30) {
                     (blockState.block as CropBlock).grow(world, world.random, blockPos, blockState)
-                    NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - Random.nextInt(10, 30))
+                    NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - RANDOM.nextInt(10, 30))
                 }
             } else if (world.isClient) {
                 world.addParticle(ParticleTypes.RAIN, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, 0.2, 0.1, 0.3)
