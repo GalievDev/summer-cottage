@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sc:block/kettle"
+    },
+    "facing=east": {
+      "model": "sc:block/kettle",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sc:block/kettle",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sc:block/kettle",
+      "y": 270
+    }
+  }
+}

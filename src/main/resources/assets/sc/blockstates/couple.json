@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sc:block/couple"
+    },
+    "facing=east": {
+      "model": "sc:block/couple",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sc:block/couple",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sc:block/couple",
+      "y": 270
+    }
+  }
+}
