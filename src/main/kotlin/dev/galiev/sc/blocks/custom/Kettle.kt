@@ -17,7 +17,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
-
 class Kettle(settings: Settings = Settings.of(Material.STONE).nonOpaque()) : Block(settings), Waterloggable {
     companion object {
         val FACING = Properties.FACING
