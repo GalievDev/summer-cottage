@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sc:block/darts_desk"
+    },
+    "facing=east": {
+      "model": "sc:block/darts_desk",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sc:block/darts_desk",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sc:block/darts_desk",
+      "y": 270
+    }
+  }
+}
