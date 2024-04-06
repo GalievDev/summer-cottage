@@ -51,7 +51,6 @@ object ItemsRegistry {
         }
     }
 
-
     private fun Item.create(id: String): Item = this.apply {
         ITEMS[this] = Identifier(MOD_ID, id)
     }
