@@ -9,6 +9,7 @@ import dev.galiev.sc.items.clothes.fisherman.FlipFlops
 import dev.galiev.sc.items.clothes.gardener.GardenerHat
 import dev.galiev.sc.items.clothes.gardener.GardenerLeggings
 import dev.galiev.sc.items.clothes.gardener.GardenerShirt
+import dev.galiev.sc.items.custom.Darts
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -19,46 +20,39 @@ import net.minecraft.util.Identifier
 
 
 object ItemsRegistry {
+    private val ITEMS: MutableMap<Item, Identifier> = LinkedHashMap()
 
-    val WATER_CAN = registerItem("water_can", WaterCan())
+    val WATER_CAN = WaterCan().create("water_can")
 
-    val RAKE = registerItem("rake", Rake())
+    val RAKE = Rake().create("rake")
 
-    val GARDENER_HAT = registerItem("gardener_hat", GardenerHat())
+    val DARTS = Darts().create("darts")
 
-    val GARDENER_SHIRT = registerItem("gardener_shirt", GardenerShirt())
+    val GARDENER_HAT = GardenerHat().create("gardener_hat")
 
-    val GARDENER_LEGGINGS = registerItem("gardener_leggings", GardenerLeggings())
+    val GARDENER_SHIRT = GardenerShirt().create("gardener_shirt")
 
-    val FISHERMAN_HAT = registerItem("fisherman_hat", FishermanHat())
+    val GARDENER_LEGGINGS = GardenerLeggings().create("gardener_leggings")
 
-    val FISHERMAN_SHIRT = registerItem("fisherman_shirt", FishermanShirt())
+    val FISHERMAN_HAT = FishermanHat().create("fisherman_hat")
 
-    val FISHERMAN_LEGGINGS = registerItem("fisherman_leggings", FishermanLeggings())
+    val FISHERMAN_SHIRT = FishermanShirt().create("fisherman_shirt")
 
-    val FLIP_FLOPS = registerItem("flip_flops", FlipFlops())
+    val FISHERMAN_LEGGINGS = FishermanLeggings().create("fisherman_leggings")
 
-    private fun registerItem(name: String, item: Item): Item? {
-        return Registry.register(Registries.ITEM, Identifier(MOD_ID, name), item)
+    val FLIP_FLOPS = FlipFlops().create("flip_flops")
+
+    init {
+        ITEMS.keys.forEach { item ->
+            Registry.register(Registries.ITEM, ITEMS[item], item)
+            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register {
+                it.add(item)
+            }
+        }
     }
 
-    private fun addItemsToItemGroup() {
-        addToItemGroup(WATER_CAN)
-        addToItemGroup(RAKE)
-        addToItemGroup(GARDENER_HAT)
-        addToItemGroup(GARDENER_SHIRT)
-        addToItemGroup(GARDENER_LEGGINGS)
-        addToItemGroup(FISHERMAN_HAT)
-        addToItemGroup(FISHERMAN_SHIRT)
-        addToItemGroup(FISHERMAN_LEGGINGS)
-        addToItemGroup(FLIP_FLOPS)
-    }
 
-    private fun addToItemGroup(item: Item?) {
-        ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register(ItemGroupEvents.ModifyEntries { entries -> entries.add(item) })
-    }
-
-    fun registerModItems() {
-        addItemsToItemGroup()
+    private fun Item.create(id: String): Item = this.apply {
+        ITEMS[this] = Identifier(MOD_ID, id)
     }
 }
