@@ -1,10 +1,12 @@
 package dev.galiev.sc.blocks
 
 import dev.galiev.sc.SummerCottage
+import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
 import dev.galiev.sc.blocks.custom.Couple
 import dev.galiev.sc.blocks.custom.DartsDesk
 import dev.galiev.sc.blocks.custom.Kettle
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
@@ -25,13 +27,13 @@ object BlocksRegistry {
             val blockItem = BlockItem(it, FabricItemSettings())
             Registry.register(Registries.BLOCK, BLOCKS[it], it)
             Registry.register(Registries.ITEM, BLOCKS[it], blockItem)
-
-            SummerCottage.addAllToGroup(blockItem)
+            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register {
+                it.add(blockItem)
+            }
         }
     }
 
-    private fun Block.create(name: String): Block {
+    private fun Block.create(name: String): Block = this.apply {
         BLOCKS[this] = Identifier(SummerCottage.MOD_ID, name)
-        return this
     }
 }
