@@ -1,6 +1,6 @@
 package dev.galiev.sc.blocks.custom.entity
 
-import dev.galiev.sc.helper.EntityTypeRegistry
+import dev.galiev.sc.enity.EntitiesRegistry
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -14,8 +14,8 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 
-class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntityTypeRegistry.CHAIR_ENTITY, world) {
-    constructor(world: World?) : this(EntityTypeRegistry.CHAIR_ENTITY, world) {
+class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntitiesRegistry.CHAIR_ENTITY, world) {
+    constructor(world: World?) : this(EntitiesRegistry.CHAIR_ENTITY, world) {
         noClip = true
     }
 
