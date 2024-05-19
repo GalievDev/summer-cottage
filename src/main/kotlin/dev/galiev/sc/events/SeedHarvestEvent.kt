@@ -32,17 +32,14 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
             val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item
 
             if (helmet == ItemsRegistry.GARDENER_HAT && chest == ItemsRegistry.GARDENER_SHIRT && legs == ItemsRegistry.GARDENER_LEGGINGS) {
-                if (RANDOM.nextInt(1, 100) == 49) {
-                    val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player?.mainHandStack)
-
+                if (RANDOM.nextInt(1, 100) <= 49) {
+                    val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player.mainHandStack)
                     for (drop in drops) {
                         val count = drop.count
                         drop.count = count * 2
 
                         world.spawnEntity(ItemEntity(world, pos?.x?.toDouble()!!, pos.y.toDouble(), pos.z.toDouble(), drop))
                     }
-
-                    world.breakBlock(pos, false, player)
                 }
             }
         }
