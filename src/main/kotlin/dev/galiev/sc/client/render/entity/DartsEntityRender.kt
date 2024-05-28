@@ -6,6 +6,7 @@ import dev.galiev.sc.enity.custom.DartsEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
+import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
@@ -14,6 +15,9 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
+import org.joml.Matrix3f
+import org.joml.Matrix4f
+
 
 @Environment(EnvType.CLIENT)
 class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<DartsEntity>(ctx) {
@@ -34,13 +38,14 @@ class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<Da
         light: Int
     ) {
         matrices.push()
+
         matrices.multiply(
             RotationAxis.POSITIVE_Y.rotationDegrees(
                 MathHelper.lerp(
                     tickDelta,
                     entity.prevYaw,
                     entity.yaw
-                ) - 240.0f
+                ) + 180.0f
             )
         )
 
@@ -50,7 +55,7 @@ class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<Da
                     tickDelta,
                     entity.prevPitch,
                     entity.pitch
-                ) + 180.0f
+                ) - 180.0f
             )
         )
 
@@ -61,7 +66,27 @@ class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<Da
             false
         )
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
+
         matrices.pop()
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
+    }
+
+    fun vertex(
+        positionMatrix: Matrix4f?,
+        normalMatrix: Matrix3f?,
+        vertexConsumer: VertexConsumer,
+        x: Int,
+        y: Int,
+        z: Int,
+        u: Float,
+        v: Float,
+        normalX: Int,
+        normalZ: Int,
+        normalY: Int,
+        light: Int
+    ) {
+        vertexConsumer.vertex(positionMatrix, x.toFloat(), y.toFloat(), z.toFloat()).color(255, 255, 255, 255)
+            .texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light)
+            .normal(normalMatrix, normalX.toFloat(), normalY.toFloat(), normalZ.toFloat()).next()
     }
 }

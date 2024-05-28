@@ -38,7 +38,7 @@ class DartsEntityModel(root: ModelPart) : Model(RenderLayer::getEntitySolid) {
                     .uv(6, 6).cuboid(0.25f, -5.0f, -1.375f, 0.25f, 0.5f, 1.5f, Dilation(0.0f))
                     .uv(6, 6).cuboid(-0.25f, -5.0f, 0.125f, 0.5f, 0.5f, 1.5f, Dilation(0.0f))
                     .uv(4, 4).cuboid(-0.25f, -5.0f, -3.375f, 0.5f, 0.5f, 2.0f, Dilation(0.0f)),
-                ModelTransform.rotation(0.0f, 24.0f, 0.0f)
+                ModelTransform.rotation(0.0f, 0.0f, 0.0f)
             )
 
             return TexturedModelData.of(modelData, 16, 16)
