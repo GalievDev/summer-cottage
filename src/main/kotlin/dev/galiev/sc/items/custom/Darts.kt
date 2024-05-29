@@ -62,6 +62,6 @@ class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
     }
 
     override fun getMaxUseTime(stack: ItemStack?): Int {
-        return 323432000
+        return 72000
     }
 }
