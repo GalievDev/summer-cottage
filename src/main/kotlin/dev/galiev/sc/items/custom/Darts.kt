@@ -1,5 +1,7 @@
 package dev.galiev.sc.items.custom
 
+import dev.galiev.sc.SummerCottage.RANDOM
+import dev.galiev.sc.SummerCottage.logger
 import dev.galiev.sc.enity.custom.DartsEntity
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
@@ -17,6 +19,7 @@ import net.minecraft.world.World
 
 
 class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
+
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
         if (user is PlayerEntity) {
             val i = getMaxUseTime(stack) - remainingUseTicks
@@ -57,11 +60,29 @@ class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
         return TypedActionResult.consume(stack)
     }
 
+    override fun usageTick(world: World?, user: LivingEntity?, stack: ItemStack?, remainingUseTicks: Int) {
+        if (user is PlayerEntity) {
+            logger.info("using: ${user.itemUseTime}")
+            if(user.itemUseTime >= 41) {
+                if (RANDOM.nextInt(0, 100) <= 89) {
+                    user.yaw += RANDOM.nextInt(-1, 1).toFloat()
+                    user.pitch += RANDOM.nextInt(-1, 1).toFloat()
+                }
+            } else {
+                if (RANDOM.nextInt(0, 100) <= 49) {
+                    user.yaw += RANDOM.nextInt(-1, 1).toFloat()
+                    user.pitch += RANDOM.nextInt(-1, 1).toFloat()
+                }
+            }
+        }
+        super.usageTick(world, user, stack, remainingUseTicks)
+    }
+
     override fun getUseAction(stack: ItemStack?): UseAction {
         return UseAction.SPEAR
     }
 
     override fun getMaxUseTime(stack: ItemStack?): Int {
-        return 72000
+        return 92000
     }
 }
