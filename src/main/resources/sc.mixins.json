@@ -12,6 +12,8 @@
   "client": [
     "AbstractClientPlayerEntityMixin",
     "ArmorFeatureRendererMixin",
-    "HeadFeatureRendererMixin"
+    "HeadFeatureRendererMixin",
+    "ItemRendererMixin",
+    "ModelLoaderMixin"
   ]
 }
