@@ -16,7 +16,7 @@ object EntitiesRegistry {
 
     val DARTS_ENTITY: EntityType<DartsEntity> =
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::DartsEntity)
-            .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
+            .dimensions(EntityDimensions.fixed(0.2F, 0.2F))
             .build()
             .create("darts_entity")
 
