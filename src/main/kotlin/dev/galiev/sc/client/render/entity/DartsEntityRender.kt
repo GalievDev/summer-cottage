@@ -42,7 +42,7 @@ class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<Da
                     tickDelta,
                     entity.prevYaw,
                     entity.yaw
-                ) + 180.0f
+                ) - 120.0f
             )
         )
 
@@ -52,7 +52,7 @@ class DartsEntityRender(ctx: EntityRendererFactory.Context?) : EntityRenderer<Da
                     tickDelta,
                     entity.prevPitch,
                     entity.pitch
-                ) - 180.0f
+                )
             )
         )
 
