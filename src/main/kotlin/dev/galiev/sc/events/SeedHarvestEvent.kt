@@ -1,7 +1,9 @@
 package dev.galiev.sc.events
 
 import dev.galiev.sc.SummerCottage.RANDOM
-import dev.galiev.sc.items.ItemsRegistry
+import dev.galiev.sc.items.clothes.gardener.GardenerHat
+import dev.galiev.sc.items.clothes.gardener.GardenerLeggings
+import dev.galiev.sc.items.clothes.gardener.GardenerShirt
 import dev.galiev.sc.mixin.CropBlockMixin
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.block.Block
@@ -31,7 +33,7 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
             val chest = player?.getEquippedStack(EquipmentSlot.CHEST)?.item
             val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item
 
-            if (helmet == ItemsRegistry.GARDENER_HAT && chest == ItemsRegistry.GARDENER_SHIRT && legs == ItemsRegistry.GARDENER_LEGGINGS) {
+            if (helmet is GardenerHat && chest is GardenerShirt && legs is GardenerLeggings) {
                 if (RANDOM.nextInt(1, 100) <= 49) {
                     val drops = Block.getDroppedStacks(state, world as ServerWorld, pos, null, player, player.mainHandStack)
                     for (drop in drops) {
