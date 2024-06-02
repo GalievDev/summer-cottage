@@ -1,6 +1,8 @@
 package dev.galiev.sc.events
 
-import dev.galiev.sc.items.ItemsRegistry
+import dev.galiev.sc.items.clothes.fisherman.FishermanHat
+import dev.galiev.sc.items.clothes.fisherman.FishermanLeggings
+import dev.galiev.sc.items.clothes.fisherman.FishermanShirt
 import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -22,7 +24,7 @@ object FishingEvent: UseItemCallback {
             val chest = player.getEquippedStack(EquipmentSlot.CHEST)?.item
             val legs = player.getEquippedStack(EquipmentSlot.LEGS)?.item
 
-            if (helmet == ItemsRegistry.FISHERMAN_HAT && chest == ItemsRegistry.FISHERMAN_SHIRT && legs == ItemsRegistry.FISHERMAN_LEGGINGS) {
+            if (helmet is FishermanHat && chest is FishermanShirt && legs is FishermanLeggings) {
                 player.addStatusEffect(StatusEffectInstance(StatusEffects.LUCK))
             }
             return TypedActionResult.pass(stack)
