@@ -4,6 +4,7 @@ import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
 import dev.galiev.sc.blocks.custom.Couple
 import dev.galiev.sc.blocks.custom.DartsDesk
+import dev.galiev.sc.blocks.custom.FoldingChair
 import dev.galiev.sc.blocks.custom.Kettle
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -17,7 +18,7 @@ import net.minecraft.util.Identifier
 object BlocksRegistry {
     private val BLOCKS: MutableMap<Block, Identifier> = LinkedHashMap()
 
-        //val FOLDING_CHAIR = FoldingChair().create("folding_chair")
+    val FOLDING_CHAIR = FoldingChair().create("folding_chair")
     val KETTLE = Kettle().create("kettle")
     val COUPLE = Couple().create("couple")
     val DARTS_DESK = DartsDesk().create("darts_desk")
