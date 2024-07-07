@@ -6,12 +6,9 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "CropBlockMixin",
-    "LivingEntityMixin"
+    "CropBlockMixin"
   ],
   "client": [
-    "AbstractClientPlayerEntityMixin",
-    "ArmorFeatureRendererMixin",
-    "HeadFeatureRendererMixin"
+    "AbstractClientPlayerEntityMixin"
   ]
 }
