@@ -26,7 +26,6 @@ object SummerCottage: ModInitializer {
     val SUMMER_COTTAGE: ItemGroup = FabricItemGroup.builder(Identifier(MOD_ID)).icon { ItemsRegistry.WATER_CAN.asItem()?.defaultStack }.build()
 
     override fun onInitialize() {
-        logger.info("${javaClass.simpleName} initialized with mod-id $MOD_ID")
         ItemsRegistry
         BlocksRegistry
         EntitiesRegistry
