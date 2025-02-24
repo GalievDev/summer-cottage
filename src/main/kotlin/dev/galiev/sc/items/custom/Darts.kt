@@ -1,7 +1,6 @@
 package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage.RANDOM
-import dev.galiev.sc.SummerCottage.logger
 import dev.galiev.sc.enity.custom.DartsEntity
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
@@ -62,7 +61,6 @@ class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
 
     override fun usageTick(world: World?, user: LivingEntity?, stack: ItemStack?, remainingUseTicks: Int) {
         if (user is PlayerEntity) {
-            logger.info("using: ${user.itemUseTime}")
             if(user.itemUseTime >= 41) {
                 if (RANDOM.nextInt(0, 100) <= 89) {
                     user.yaw += RANDOM.nextInt(-1, 1).toFloat()

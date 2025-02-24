@@ -18,7 +18,7 @@ object EntitiesRegistry {
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::DartsEntity)
             .dimensions(EntityDimensions.fixed(0.2F, 0.2F))
             .build()
-            .create("darts_entity")
+            .create("darts")
 
     val CHAIR_ENTITY: EntityType<ChairEntity> =
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ChairEntity)
