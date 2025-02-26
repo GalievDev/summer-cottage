@@ -1,6 +1,5 @@
 package dev.galiev.sc.items.custom
 
-import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.helper.NbtHelper
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -34,7 +33,7 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
         val trace: BlockHitResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY)
 
         if (trace.type != HitResult.Type.BLOCK){
-            return TypedActionResult.pass(stack)
+            return TypedActionResult.fail(stack)
         }
 
         val pos = trace.blockPos
@@ -42,24 +41,24 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
 
         if (!NbtHelper.getBoolean(stack, "Water")) {
             if (state?.material == Material.WATER) {
-                NbtHelper.setInt(stack, "Liters", 1000)
+                NbtHelper.setInt(stack, "Milliliters", 1000)
                 NbtHelper.setBoolean(stack, "Water", true)
                 user?.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F)
 
-                SummerCottage.logger.info("Water: ${NbtHelper.getInt(stack, "Liters")}")
-
                 return TypedActionResult.success(stack)
+            } else {
+                return TypedActionResult.fail(stack)
             }
         }
-        return TypedActionResult.pass(stack)
+        return TypedActionResult.fail(stack)
     }
 
     override fun useOnBlock(context: ItemUsageContext?): ActionResult {
         val world = context?.world
         val item = context?.stack
-        val blockPos = context?.blockPos
+        val blockPos = context?.blockPos ?: return ActionResult.FAIL
 
-        if (NbtHelper.getBoolean(item, "Liters") && blockPos != null) {
+        if (NbtHelper.getBoolean(item, "Water")) {
             for (targetPos in BlockPos.iterate(blockPos.add(-1, 0, -1), blockPos.add(1, 0, 1))) {
                 useOnFertilizable(targetPos, world!!, item!!)
             }
@@ -67,18 +66,18 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
                 world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, blockPos, 0)
             }
             return ActionResult.success(world.isClient)
-        }
-
-        return ActionResult.PASS
+        } else return ActionResult.FAIL
     }
 
     private fun useOnFertilizable(pos: BlockPos, world: World, stack: ItemStack): Boolean {
         val blockState = world.getBlockState(pos)
         if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, pos, blockState, world.isClient)) {
             if (world is ServerWorld){
-                if ((blockState.block as CropBlock).canGrow(world, world.random, pos, blockState) && NbtHelper.getInt(stack, "Liters") >= 30) {
+                if ((blockState.block as CropBlock).canGrow(world, world.random, pos, blockState) && NbtHelper.getInt(stack, "Milliliters") >= 100) {
                     (blockState.block as CropBlock).grow(world, world.random, pos, blockState)
-                    NbtHelper.setInt(stack, "Liters", NbtHelper.getInt(stack, "Liters") - RANDOM.nextInt(10, 30))
+                    NbtHelper.setInt(stack, "Milliliters", NbtHelper.getInt(stack, "Milliliters") - RANDOM.nextInt(50, 100))
+                } else if (NbtHelper.getInt(stack, "Milliliters") <= 100) {
+                    NbtHelper.setBoolean(stack, "Water", false)
                 }
             } else if (world.isClient) {
                 world.addParticle(ParticleTypes.RAIN, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, 0.2, 0.1, 0.3)
@@ -90,7 +89,7 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
 
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
-        val waterCount = NbtHelper.getInt(stack, "Liters")
+        val waterCount = NbtHelper.getInt(stack, "Milliliters")
 
         tooltip?.add(Text.literal("$waterCount/1000 Milliliters").formatted(Formatting.AQUA))
 
