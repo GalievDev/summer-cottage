@@ -2,6 +2,7 @@ package dev.galiev.sc.items.clothes
 
 import dev.galiev.sc.items.client.GardenerClothRenderer
 import dev.galiev.sc.items.materials.Materials
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.render.entity.model.BipedEntityModel
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -17,7 +18,7 @@ import java.util.function.Consumer
 import java.util.function.Supplier
 
 
-open class GardenerClothItem(type: Type?, settings: Settings?) : ArmorItem(Materials.CLOTH_ARMOR_MATERIAL, type, settings), GeoItem {
+class GardenerClothItem(type: Type?) : ArmorItem(Materials.CLOTH_ARMOR_MATERIAL, type, FabricItemSettings()), GeoItem {
     private val cache = SingletonAnimatableInstanceCache(this)
     private val renderProvider = GeoItem.makeRenderer(this)
 

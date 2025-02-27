@@ -7,14 +7,14 @@ import software.bernie.geckolib.model.GeoModel
 
 class GardenerClothModel: GeoModel<GardenerClothItem>() {
     override fun getModelResource(animatable: GardenerClothItem?): Identifier {
-        return Identifier(MOD_ID, "geo/gardener.geo.json")
+        return Identifier(MOD_ID, "geo/gardener_armor.geo.json")
     }
 
     override fun getTextureResource(animatable: GardenerClothItem?): Identifier {
-        return Identifier(MOD_ID, "textures/armor/gardener.png")
+        return Identifier(MOD_ID, "textures/armor/gardener_armor.png")
     }
 
     override fun getAnimationResource(animatable: GardenerClothItem?): Identifier {
-        return Identifier(MOD_ID, "animations/gardener.animation.json")
+        return Identifier(MOD_ID, "animations/gardener_armor.animation.json")
     }
 }

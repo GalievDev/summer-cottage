@@ -2,17 +2,13 @@ package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
-import dev.galiev.sc.items.clothes.fisherman.FishermanHat
-import dev.galiev.sc.items.clothes.fisherman.FishermanLeggings
-import dev.galiev.sc.items.clothes.fisherman.FishermanShirt
-import dev.galiev.sc.items.clothes.fisherman.FlipFlops
-import dev.galiev.sc.items.clothes.gardener.GardenerHat
-import dev.galiev.sc.items.clothes.gardener.GardenerLeggings
-import dev.galiev.sc.items.clothes.gardener.GardenerShirt
+import dev.galiev.sc.items.clothes.GardenerClothItem
+import dev.galiev.sc.items.clothes.RubberClothItem
 import dev.galiev.sc.items.custom.Darts
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
+import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -28,19 +24,21 @@ object ItemsRegistry {
 
     val DARTS = Darts().create("darts")
 
-    val GARDENER_HAT = GardenerHat().create("gardener_hat")
+    val GARDENER_HAT = GardenerClothItem(ArmorItem.Type.HELMET).create("gardener_hat")
 
-    val GARDENER_SHIRT = GardenerShirt().create("gardener_shirt")
+    val GARDENER_SHIRT = GardenerClothItem(ArmorItem.Type.CHESTPLATE).create("gardener_shirt")
 
-    val GARDENER_LEGGINGS = GardenerLeggings().create("gardener_leggings")
+    val GARDENER_LEGGINGS = GardenerClothItem(ArmorItem.Type.LEGGINGS).create("gardener_leggings")
 
-    val FISHERMAN_HAT = FishermanHat().create("fisherman_hat")
+    val GARDENER_BOOTS = GardenerClothItem(ArmorItem.Type.BOOTS).create("gardener_boots")
 
-    val FISHERMAN_SHIRT = FishermanShirt().create("fisherman_shirt")
+    val FISHERMAN_HAT = RubberClothItem(ArmorItem.Type.HELMET).create("fisherman_hat")
 
-    val FISHERMAN_LEGGINGS = FishermanLeggings().create("fisherman_leggings")
+    val FISHERMAN_SHIRT = RubberClothItem(ArmorItem.Type.CHESTPLATE).create("fisherman_shirt")
 
-    val FLIP_FLOPS = FlipFlops().create("flip_flops")
+    val FISHERMAN_LEGGINGS = RubberClothItem(ArmorItem.Type.LEGGINGS).create("fisherman_leggings")
+
+    val FLIP_FLOPS = RubberClothItem(ArmorItem.Type.BOOTS).create("flip_flops")
 
     init {
         ITEMS.keys.forEach { item ->
