@@ -25,12 +25,6 @@
         "adapter": "kotlin",
         "value": "dev.galiev.sc.client.SummerCottageClient"
       }
-    ],
-    "fabric-datagen": [
-      {
-        "adapter": "kotlin",
-        "value": "dev.galiev.sc.SummerCottageDataGenerator"
-      }
     ]
   },
   "mixins": [
