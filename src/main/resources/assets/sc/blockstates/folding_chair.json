@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "sc:block/folding_chair"
+    },
+    "facing=east": {
+      "model": "sc:block/folding_chair",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sc:block/folding_chair",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sc:block/folding_chair",
+      "y": 270
     }
   }
 }

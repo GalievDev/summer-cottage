@@ -5,6 +5,8 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -18,16 +20,17 @@ import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
 class Kettle(settings: Settings = Settings.of(Material.STONE).nonOpaque()) : Block(settings), Waterloggable {
+
     companion object {
-        val FACING = Properties.FACING
-        val WATERLOGGED = Properties.WATERLOGGED
+        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
     init {
-        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH).with(WATERLOGGED, false))
+        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH)).with(WATERLOGGED, false)
     }
 
-    val SHAPE_N = Stream.of(
+    private val SHAPE_N = Stream.of(
         createCuboidShape(5.0, 1.0, 4.25, 5.5, 7.0, 9.25),
         createCuboidShape(6.0, 7.0, 4.75, 6.5, 9.0, 5.25),
         createCuboidShape(9.5, 7.0, 4.75, 10.0, 9.0, 5.25),
@@ -64,7 +67,7 @@ class Kettle(settings: Settings = Settings.of(Material.STONE).nonOpaque()) : Blo
         )
     }.get()
 
-    val SHAPE_W = Stream.of(
+    private val SHAPE_W = Stream.of(
         createCuboidShape(4.25, 1.0, 10.5, 9.25, 7.0, 11.0),
         createCuboidShape(4.75, 7.0, 9.5, 5.25, 9.0, 10.0),
         createCuboidShape(4.75, 7.0, 6.0, 5.25, 9.0, 6.5),
@@ -101,7 +104,7 @@ class Kettle(settings: Settings = Settings.of(Material.STONE).nonOpaque()) : Blo
         )
     }.get()
 
-    val SHAPE_S = Stream.of(
+    private val SHAPE_S = Stream.of(
         createCuboidShape(10.5, 1.0, 6.75, 11.0, 7.0, 11.75),
         createCuboidShape(9.5, 7.0, 10.75, 10.0, 9.0, 11.25),
         createCuboidShape(6.0, 7.0, 10.75, 6.5, 9.0, 11.25),
@@ -138,7 +141,7 @@ class Kettle(settings: Settings = Settings.of(Material.STONE).nonOpaque()) : Blo
         )
     }.get()
 
-    val SHAPE_E = Stream.of(
+    private val SHAPE_E = Stream.of(
         createCuboidShape(6.75, 1.0, 5.0, 11.75, 7.0, 5.5),
         createCuboidShape(10.75, 7.0, 6.0, 11.25, 9.0, 6.5),
         createCuboidShape(10.75, 7.0, 9.5, 11.25, 9.0, 10.0),

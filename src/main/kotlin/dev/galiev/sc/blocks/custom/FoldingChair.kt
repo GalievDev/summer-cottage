@@ -10,24 +10,35 @@ import net.minecraft.block.Material
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
+import net.minecraft.item.ItemPlacementContext
+import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.DirectionProperty
+import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 import net.minecraft.world.event.GameEvent
 
 class FoldingChair(settings: Settings = FabricBlockSettings.of(Material.WOOD).nonOpaque()) : Block(settings), Waterloggable {
 
-/*    companion object {
-        val FACING = Properties.FACING
-        val WATERLOGGED = Properties.WATERLOGGED
+    companion object {
+        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
     init {
-        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH).with(WATERLOGGED, false))
+        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH)).with(WATERLOGGED, false)
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext?): BlockState? {
@@ -69,7 +80,7 @@ class FoldingChair(settings: Settings = FabricBlockSettings.of(Material.WOOD).no
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>?) {
         builder?.add(FACING, WATERLOGGED)
-    }*/
+    }
 
     @Deprecated("Deprecated in Java", ReplaceWith("ActionResult.CONSUME", "net.minecraft.util.ActionResult"))
     override fun onUse(

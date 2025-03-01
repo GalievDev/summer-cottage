@@ -6,6 +6,8 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -20,16 +22,17 @@ import java.util.stream.Stream
 
 
 class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD)) : Block(settings), Waterloggable {
+
     companion object {
-        val FACING = HorizontalFacingBlock.FACING
-        val WATERLOGGED = Properties.WATERLOGGED
+        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
     init {
-        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH).with(WATERLOGGED, false))
+        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.NORTH)).with(WATERLOGGED, false)
     }
 
-    val SHAPE_N = Stream.of(
+    private val SHAPE_N = Stream.of(
         createCuboidShape(0.5, 5.5, 15.1, 1.0, 10.5, 16.1),
         createCuboidShape(1.0, 4.5, 15.1, 1.5, 11.5, 16.1),
         createCuboidShape(13.5, 3.0, 15.1, 14.0, 13.0, 16.1),
@@ -49,7 +52,7 @@ class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD)) : Bl
         createCuboidShape(5.5, 0.5, 15.1, 10.5, 15.5, 16.1)
     ).reduce { v1, v2 -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR) }.get()
 
-    val SHAPE_W = Stream.of(
+    private val SHAPE_W = Stream.of(
         createCuboidShape(15.1, 5.5, 15.0, 16.1, 10.5, 15.5),
         createCuboidShape(15.1, 4.5, 14.5, 16.1, 11.5, 15.0),
         createCuboidShape(15.1, 3.0, 2.0, 16.1, 13.0, 2.5),
@@ -69,7 +72,7 @@ class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD)) : Bl
         createCuboidShape(15.1, 0.5, 5.5, 16.1, 15.5, 10.5)
     ).reduce { v1, v2 -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR) }.get()
 
-    val SHAPE_S = Stream.of(
+    private val SHAPE_S = Stream.of(
         createCuboidShape(15.0, 5.5, 0.0, 15.5, 10.5, 0.8),
         createCuboidShape(14.5, 4.5, 0.0, 15.0, 11.5, 0.8),
         createCuboidShape(2.0, 3.0, 0.0, 2.5, 13.0, 0.8),
@@ -89,7 +92,7 @@ class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD)) : Bl
         createCuboidShape(5.5, 0.5, 0.0, 10.5, 15.5, 0.8)
     ).reduce { v1, v2 -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR) }.get()
 
-    val SHAPE_E = Stream.of(
+    private val SHAPE_E = Stream.of(
         createCuboidShape(0.0, 5.5, 0.5, 0.8, 10.5, 1.0),
         createCuboidShape(0.0, 4.5, 1.0, 0.8, 11.5, 1.5),
         createCuboidShape(0.0, 3.0, 13.5, 0.8, 13.0, 14.0),

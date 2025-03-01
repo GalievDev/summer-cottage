@@ -2,7 +2,8 @@
 	"credit": "Hasti",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "sc:block/folding_chair"
+		"0": "sc:block/folding_chair",
+		"particle": "minecraft:block/spruce_planks"
 	},
 	"elements": [
 		{

@@ -5,6 +5,8 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -18,16 +20,17 @@ import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
 class Couple(settings: Settings = Settings.of(Material.STONE).nonOpaque()): Block(settings), Waterloggable {
+
     companion object {
-        val FACING = Properties.FACING
-        val WATERLOGGED = Properties.WATERLOGGED
+        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
     init {
-        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.SOUTH).with(WATERLOGGED, false))
+        defaultState = ((stateManager.defaultState as BlockState).with(FACING, Direction.SOUTH)).with(WATERLOGGED, false)
     }
 
-    val SHAPE_N = Stream.of(
+    private val SHAPE_N = Stream.of(
         createCuboidShape(6.5, 1.0, 10.375, 9.5, 4.0, 11.375),
         createCuboidShape(6.5, 1.0, 6.375, 9.5, 4.0, 7.375),
         createCuboidShape(9.5, 1.0, 7.375, 10.5, 4.0, 10.375),
@@ -51,7 +54,7 @@ class Couple(settings: Settings = Settings.of(Material.STONE).nonOpaque()): Bloc
             BooleanBiFunction.OR)
     }.get()
 
-    val SHAPE_W = Stream.of(
+    private val SHAPE_W = Stream.of(
         createCuboidShape(10.375, 1.0, 6.5, 11.375, 4.0, 9.5),
         createCuboidShape(6.375, 1.0, 6.5, 7.375, 4.0, 9.5),
         createCuboidShape(7.375, 1.0, 5.5, 10.375, 4.0, 6.5),
@@ -76,7 +79,7 @@ class Couple(settings: Settings = Settings.of(Material.STONE).nonOpaque()): Bloc
         )
     }.get()
 
-    val SHAPE_S = Stream.of(
+    private val SHAPE_S = Stream.of(
         createCuboidShape(6.5, 1.0, 4.625, 9.5, 4.0, 5.625),
         createCuboidShape(6.5, 1.0, 8.625, 9.5, 4.0, 9.625),
         createCuboidShape(5.5, 1.0, 5.625, 6.5, 4.0, 8.625),
@@ -101,7 +104,7 @@ class Couple(settings: Settings = Settings.of(Material.STONE).nonOpaque()): Bloc
         )
     }.get()
 
-    val SHAPE_E = Stream.of(
+    private val SHAPE_E = Stream.of(
         createCuboidShape(4.625, 1.0, 6.5, 5.625, 4.0, 9.5),
         createCuboidShape(8.625, 1.0, 6.5, 9.625, 4.0, 9.5),
         createCuboidShape(5.625, 1.0, 9.5, 8.625, 4.0, 10.5),
