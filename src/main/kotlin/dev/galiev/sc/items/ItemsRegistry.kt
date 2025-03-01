@@ -38,7 +38,7 @@ object ItemsRegistry {
 
     val FISHERMAN_LEGGINGS = RubberClothItem(ArmorItem.Type.LEGGINGS).create("fisherman_leggings")
 
-    val FLIP_FLOPS = RubberClothItem(ArmorItem.Type.BOOTS).create("flip_flops")
+    val RUBBER_BOOTS = RubberClothItem(ArmorItem.Type.BOOTS).create("rubber_boots")
 
     init {
         ITEMS.keys.forEach { item ->
