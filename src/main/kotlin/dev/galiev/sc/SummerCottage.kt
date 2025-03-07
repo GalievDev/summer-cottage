@@ -5,7 +5,6 @@ import dev.galiev.sc.blocks.BlocksRegistry
 import dev.galiev.sc.enity.EntitiesRegistry
 import dev.galiev.sc.events.FishingEvent
 import dev.galiev.sc.events.SeedHarvestEvent
-import dev.galiev.sc.helper.BlocksHelper
 import dev.galiev.sc.items.ItemsRegistry
 import dev.syoritohatsuki.duckyupdater.DuckyUpdater
 import net.fabricmc.api.ModInitializer
@@ -29,7 +28,6 @@ object SummerCottage: ModInitializer {
         ItemsRegistry
         BlocksRegistry
         EntitiesRegistry
-        BlocksHelper
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
         UseItemCallback.EVENT.register(FishingEvent)
         DuckyUpdater.checkForUpdate("eJ2H87hd", MOD_ID)
