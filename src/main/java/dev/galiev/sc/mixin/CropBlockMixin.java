@@ -2,12 +2,17 @@ package dev.galiev.sc.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.state.property.IntProperty;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(CropBlock.class)
-public interface CropBlockMixin{
+public abstract class CropBlockMixin extends PlantBlock implements Fertilizable {
 
-    @Invoker("getAge")
-    public int getAgeInvoke(BlockState state);
+    public CropBlockMixin(Settings settings) {
+        super(settings);
+    }
 }

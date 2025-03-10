@@ -2,7 +2,6 @@ package dev.galiev.sc.events
 
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.items.ItemsRegistry
-import dev.galiev.sc.mixin.CropBlockMixin
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -26,7 +25,7 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
 
         val block = state?.block
 
-        if (block is CropBlock && (block as CropBlockMixin).getAgeInvoke(state) == 7) {
+        if (block is CropBlock && state.get(block.ageProperty) == CropBlock.MAX_AGE) {
             val helmet = player?.getEquippedStack(EquipmentSlot.HEAD)?.item
             val chest = player?.getEquippedStack(EquipmentSlot.CHEST)?.item
             val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item

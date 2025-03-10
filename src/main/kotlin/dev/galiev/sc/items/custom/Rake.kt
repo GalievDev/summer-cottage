@@ -2,7 +2,6 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.events.SeedHarvestEvent
-import dev.galiev.sc.mixin.CropBlockMixin
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Blocks
 import net.minecraft.block.CropBlock
@@ -48,7 +47,7 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
         else if (blockState?.isIn(BlockTags.CROPS) == true) {
             if (pos != null) {
                 for (targetPos in BlockPos.iterate(pos.add(-1, 0, -1), pos.add(1, 0, 1))) {
-                    if ((blockState.block as CropBlockMixin).getAgeInvoke(blockState) == CropBlock.MAX_AGE) {
+                    if (blockState.get((blockState.block as CropBlock).ageProperty) == CropBlock.MAX_AGE) {
                         world.breakBlock(targetPos, true)
                     }
                 }
