@@ -1,8 +1,21 @@
 {
+  "itemGroup.minecraft.sc": "Summer Cottage",
   "item.sc.water_can": "Water Can",
+  "item.sc.darts": "Darts",
   "item.sc.rake": "Rake",
+  "item.sc.gardener_hat": "Gardener's Hat",
+  "item.sc.gardener_shirt": "Gardener's Apron",
+  "item.sc.gardener_leggings": "Gardner's Apron",
+  "item.sc.gardener_boots": "Gardener's Flip-Flops",
+  "item.sc.fisherman_hat": "Fisherman's Cap",
+  "item.sc.fisherman_shirt": "Fisherman's Jumpsuit",
+  "item.sc.fisherman_leggings": "Fisherman's Jumpsuit",
+  "item.sc.rubber_boots": "Fisherman's Boots",
+  "block.sc.folding_chair": "Folding Chair",
+  "block.sc.kettle": "Kettle",
+  "block.sc.couple": "Couple",
+  "block.sc.darts_desk": "Darts Desk",
   "text.press_shift": "Press Shift for more info",
-  "text.gardener_set": "Full Gardener's Clothes gives you a chance double loot from plants",
-  "text.fisherman_set": "Full Fisherman's Clothing gives you a chance to catch more fish",
-  "text.flip_flops": "No slowdown on soul sand and mud"
+  "text.gardener_set": "Full Gardener's Clothes gives you a chance \ndouble loot from plants",
+  "text.fisherman_set": "Full Fisherman's Clothing gives you a chance \nto catch more fish (can be combined with enchantments)"
 }
