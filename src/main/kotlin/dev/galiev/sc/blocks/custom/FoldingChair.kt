@@ -30,7 +30,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.event.GameEvent
 
-class FoldingChair(settings: Settings = FabricBlockSettings.of(Material.WOOD).nonOpaque()) : Block(settings), Waterloggable {
+class FoldingChair(settings: Settings = FabricBlockSettings.of(Material.WOOD).strength(1.5f, 3.5f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING

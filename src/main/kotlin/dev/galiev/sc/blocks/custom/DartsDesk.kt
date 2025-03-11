@@ -21,7 +21,7 @@ import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
 
-class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD)) : Block(settings), Waterloggable {
+class DartsDesk(settings: Settings = FabricBlockSettings.of(Material.WOOD).strength(1.0f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
