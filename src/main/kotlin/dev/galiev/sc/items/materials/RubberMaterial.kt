@@ -8,8 +8,8 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
 class RubberMaterial: ArmorMaterial {
-    private val DURABILITY = intArrayOf(1, 2, 3, 2)
-    private val PROTECTION = intArrayOf(1, 2, 3, 1)
+    private val DURABILITY = intArrayOf(4, 5, 3, 2)
+    private val PROTECTION = intArrayOf(2, 3, 2, 1)
     override fun getDurability(type: ArmorItem.Type?): Int {
         return DURABILITY[type?.equipmentSlot?.entitySlotId!!]
     }
