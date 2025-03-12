@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:blue_wool"
+    }
+  },
+  "result": {
+    "item": "sc:fisherman_cap",
+    "count": 1
+  }
+}
