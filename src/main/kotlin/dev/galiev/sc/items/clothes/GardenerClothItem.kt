@@ -23,7 +23,7 @@ import java.util.function.Consumer
 import java.util.function.Supplier
 
 
-class GardenerClothItem(type: Type?) : ArmorItem(Materials.CLOTH_ARMOR_MATERIAL, type, FabricItemSettings()), GeoItem {
+class GardenerClothItem(type: Type?) : ArmorItem(Materials.GARDENER_CLOTH_ARMOR_MATERIAL, type, FabricItemSettings()), GeoItem {
     private val cache = SingletonAnimatableInstanceCache(this)
     private val renderProvider = GeoItem.makeRenderer(this)
 

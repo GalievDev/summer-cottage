@@ -1,6 +1,6 @@
 package dev.galiev.sc.items.clothes
 
-import dev.galiev.sc.items.client.RubberClothRenderer
+import dev.galiev.sc.items.client.FishermanClothRenderer
 import dev.galiev.sc.items.materials.Materials
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.gui.screen.Screen
@@ -22,7 +22,7 @@ import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class RubberClothItem(type: Type?) : ArmorItem(Materials.RUBBER_ARMOR_MATERIAL, type, FabricItemSettings()), GeoItem {
+class FishermanClothItem(type: Type?) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMOR_MATERIAL, type, FabricItemSettings()), GeoItem {
     private val cache = SingletonAnimatableInstanceCache(this)
     private val renderProvider = GeoItem.makeRenderer(this)
 
@@ -36,13 +36,13 @@ class RubberClothItem(type: Type?) : ArmorItem(Materials.RUBBER_ARMOR_MATERIAL, 
 
     override fun createRenderer(consumer: Consumer<Any>?) {
         consumer!!.accept(object : RenderProvider {
-            var renderer: RubberClothRenderer? = null
+            var renderer: FishermanClothRenderer? = null
 
             override fun getHumanoidArmorModel(
                 livingEntity: LivingEntity, itemStack: ItemStack,
                 equipmentSlot: EquipmentSlot, original: BipedEntityModel<LivingEntity>
             ): BipedEntityModel<LivingEntity> {
-                if (renderer == null) renderer = RubberClothRenderer()
+                if (renderer == null) renderer = FishermanClothRenderer()
 
                 renderer!!.prepForRender(livingEntity, itemStack, equipmentSlot, original)
 
@@ -55,7 +55,7 @@ class RubberClothItem(type: Type?) : ArmorItem(Materials.RUBBER_ARMOR_MATERIAL, 
         return renderProvider
     }
 
-    private fun predicate(animationState: AnimationState<RubberClothItem>): PlayState {
+    private fun predicate(animationState: AnimationState<FishermanClothItem>): PlayState {
         animationState.controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP))
         return PlayState.CONTINUE
     }

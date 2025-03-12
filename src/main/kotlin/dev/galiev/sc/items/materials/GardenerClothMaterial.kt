@@ -7,7 +7,7 @@ import net.minecraft.registry.tag.ItemTags
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
-class ClothMaterial: ArmorMaterial {
+class GardenerClothMaterial: ArmorMaterial {
     private val DURABILITY = intArrayOf(2, 3, 2, 2)
     private val PROTECTION = intArrayOf(2, 3, 2, 1)
     override fun getDurability(type: ArmorItem.Type?): Int {
@@ -31,7 +31,7 @@ class ClothMaterial: ArmorMaterial {
     }
 
     override fun getName(): String {
-        return "cloth"
+        return "gardener"
     }
 
     override fun getToughness(): Float {

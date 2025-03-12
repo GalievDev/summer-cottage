@@ -2,8 +2,8 @@ package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
 import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
+import dev.galiev.sc.items.clothes.FishermanClothItem
 import dev.galiev.sc.items.clothes.GardenerClothItem
-import dev.galiev.sc.items.clothes.RubberClothItem
 import dev.galiev.sc.items.custom.Darts
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
@@ -32,13 +32,13 @@ object ItemsRegistry {
 
     val GARDENER_BOOTS = GardenerClothItem(ArmorItem.Type.BOOTS).create("gardener_boots")
 
-    val FISHERMAN_HAT = RubberClothItem(ArmorItem.Type.HELMET).create("fisherman_hat")
+    val FISHERMAN_HAT = FishermanClothItem(ArmorItem.Type.HELMET).create("fisherman_cap")
 
-    val FISHERMAN_SHIRT = RubberClothItem(ArmorItem.Type.CHESTPLATE).create("fisherman_shirt")
+    val FISHERMAN_SHIRT = FishermanClothItem(ArmorItem.Type.CHESTPLATE).create("fisherman_shirt")
 
-    val FISHERMAN_LEGGINGS = RubberClothItem(ArmorItem.Type.LEGGINGS).create("fisherman_leggings")
+    val FISHERMAN_LEGGINGS = FishermanClothItem(ArmorItem.Type.LEGGINGS).create("fisherman_leggings")
 
-    val RUBBER_BOOTS = RubberClothItem(ArmorItem.Type.BOOTS).create("rubber_boots")
+    val RUBBER_BOOTS = FishermanClothItem(ArmorItem.Type.BOOTS).create("fisherman_boots")
 
     init {
         ITEMS.keys.forEach { item ->

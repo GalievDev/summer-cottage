@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "sc:item/cloth/rubber_boots"
+    "layer0": "sc:item/cloth/fisherman_boots"
   }
 }

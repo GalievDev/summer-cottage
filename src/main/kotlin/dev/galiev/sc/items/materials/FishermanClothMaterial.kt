@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
-class RubberMaterial: ArmorMaterial {
+class FishermanClothMaterial: ArmorMaterial {
     private val DURABILITY = intArrayOf(4, 5, 3, 2)
     private val PROTECTION = intArrayOf(2, 3, 2, 1)
     override fun getDurability(type: ArmorItem.Type?): Int {
@@ -31,7 +31,7 @@ class RubberMaterial: ArmorMaterial {
     }
 
     override fun getName(): String {
-        return "rubber"
+        return "fisherman"
     }
 
     override fun getToughness(): Float {
