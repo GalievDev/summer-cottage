@@ -30,6 +30,9 @@
   "mixins": [
     "sc.mixins.json"
   ],
+  "custom": {
+    "fstats": 2
+  },
   "depends": {
     "fabricloader": ">=${loaderVersion}",
     "fabric": "*",
