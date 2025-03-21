@@ -11,7 +11,7 @@
     "homepage": "https://galievdev.github.io/"
   },
   "license": "MIT Licence",
-  "icon": "assets/template/icon.png",
+  "icon": "assets/sc/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -35,6 +35,11 @@
     "fabric": "*",
     "fabric-language-kotlin": ">=${fabricKotlinVersion}",
     "minecraft": "${minecraftVersion}",
-    "java": ">=${javaVersion}"
+    "java": ">=${javaVersion}",
+    "geckolib": ">=${geckolib}"
+  },
+  "suggests": {
+    "fstats-api": ">=${fstats}",
+    "ducky-updater": ">=${duckyUpdater}"
   }
 }

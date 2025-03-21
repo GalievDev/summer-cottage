@@ -15,9 +15,13 @@ base {
 val fabricKotlinVersion: String by project
 val javaVersion = JavaVersion.VERSION_17
 val loaderVersion: String by project
+val yarnMappings: String by project
+val fabricVersion: String by project
 val minecraftVersion: String by project
 val modId: String by project
-
+val geckolib: String by project
+val fstats: String by project
+val duckyUpdater: String by project
 val modVersion: String by project
 version = "${DateTimeFormatter.ofPattern("yyyy.MM").format(LocalDateTime.now())}.$modVersion"
 
@@ -33,18 +37,17 @@ repositories {
 dependencies {
     minecraft("com.mojang", "minecraft", minecraftVersion)
 
-    val yarnMappings: String by project
     mappings("net.fabricmc", "yarn", yarnMappings, null, "v2")
 
     modImplementation("net.fabricmc", "fabric-loader", loaderVersion)
 
-    val fabricVersion: String by project
     modImplementation("net.fabricmc.fabric-api", "fabric-api", fabricVersion)
 
     modImplementation("net.fabricmc", "fabric-language-kotlin", fabricKotlinVersion)
-    modImplementation("software.bernie.geckolib:geckolib-fabric-1.19.4:4.2")
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.19.4:$geckolib")
 
-    include(modImplementation("maven.modrinth", "ducky-updater-lib", "2023.5.1"))
+    include(modImplementation("maven.modrinth", "fstats", fstats))
+    include(modImplementation("maven.modrinth", "ducky-updater-lib", duckyUpdater))
 }
 
 tasks {
@@ -78,7 +81,10 @@ tasks {
                     "loaderVersion" to loaderVersion,
                     "minecraftVersion" to minecraftVersion,
                     "fabricKotlinVersion" to fabricKotlinVersion,
-                    "javaVersion" to javaVersion.toString()
+                    "javaVersion" to javaVersion.toString(),
+                    "geckolib" to geckolib,
+                    "fstats" to fstats,
+                    "duckyUpdater" to duckyUpdater
                 )
             )
         }
