@@ -8,17 +8,16 @@ import dev.galiev.sc.helper.SolsticeDay
 import dev.galiev.sc.items.ItemsRegistry
 import dev.syoritohatsuki.duckyupdater.DuckyUpdater
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
-import net.fabricmc.fabric.api.networking.v1.PacketSender
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.item.ItemGroup
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import java.time.LocalDate
+import java.util.*
 import kotlin.random.Random
 
 object SummerCottage: ModInitializer {
@@ -35,10 +34,17 @@ object SummerCottage: ModInitializer {
         EntitiesRegistry
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
 
-        ClientPlayConnectionEvents.JOIN.register(ClientPlayConnectionEvents.Join { _: ClientPlayNetworkHandler?, _: PacketSender?, client: MinecraftClient? ->
+        val notifiedPlayers = mutableSetOf<UUID>()
+        ServerTickEvents.START_WORLD_TICK.register(ServerTickEvents.StartWorldTick { world: ServerWorld ->
             val (from, to) = SolsticeDay.SOLSTICE.getDays()
             if (LocalDate.now() in from..to) {
-                client?.player?.sendMessage(Text.of("Solstice day! Today all crops will grow up faster."))
+                world.players.forEach {
+                    if (notifiedPlayers.add(it.uuid)) {
+                        it.sendMessage(Text.of("Solstice day! Today all crops will grow up faster."))
+                    }
+                }
+            } else {
+                notifiedPlayers.clear()
             }
         })
 
