@@ -1,7 +1,7 @@
 package dev.galiev.sc.items
 
 import dev.galiev.sc.SummerCottage.MOD_ID
-import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
+import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE_KEY
 import dev.galiev.sc.items.clothes.FishermanClothItem
 import dev.galiev.sc.items.clothes.GardenerClothItem
 import dev.galiev.sc.items.custom.Darts
@@ -43,7 +43,7 @@ object ItemsRegistry {
     init {
         ITEMS.keys.forEach { item ->
             Registry.register(Registries.ITEM, ITEMS[item], item)
-            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register {
+            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE_KEY).register {
                 it.add(item)
             }
         }

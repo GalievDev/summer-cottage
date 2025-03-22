@@ -1,6 +1,9 @@
 package dev.galiev.sc.blocks.custom
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
@@ -19,7 +22,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
-class Kettle(settings: Settings = Settings.of(Material.STONE).strength(1.8f).nonOpaque()) : Block(settings), Waterloggable {
+class Kettle(settings: Settings = Settings.create().strength(1.8f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING

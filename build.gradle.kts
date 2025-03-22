@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -13,7 +14,7 @@ base {
 }
 
 val fabricKotlinVersion: String by project
-val javaVersion = JavaVersion.VERSION_17
+val javaVersion = JavaVersion.VERSION_21
 val loaderVersion: String by project
 val yarnMappings: String by project
 val fabricVersion: String by project
@@ -44,7 +45,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api", "fabric-api", fabricVersion)
 
     modImplementation("net.fabricmc", "fabric-language-kotlin", fabricKotlinVersion)
-    modImplementation("software.bernie.geckolib:geckolib-fabric-1.19.4:$geckolib")
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.20.1:$geckolib")
 
     include(modImplementation("maven.modrinth", "fstats", fstats))
     include(modImplementation("maven.modrinth", "ducky-updater-lib", duckyUpdater))
@@ -59,8 +60,8 @@ tasks {
     }
 
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = javaVersion.toString()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 

@@ -1,7 +1,7 @@
 package dev.galiev.sc.blocks
 
 import dev.galiev.sc.SummerCottage
-import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE
+import dev.galiev.sc.SummerCottage.SUMMER_COTTAGE_KEY
 import dev.galiev.sc.blocks.custom.Couple
 import dev.galiev.sc.blocks.custom.DartsDesk
 import dev.galiev.sc.blocks.custom.FoldingChair
@@ -28,7 +28,7 @@ object BlocksRegistry {
             val blockItem = BlockItem(it, FabricItemSettings())
             Registry.register(Registries.BLOCK, BLOCKS[it], it)
             Registry.register(Registries.ITEM, BLOCKS[it], blockItem)
-            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE).register {
+            ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE_KEY).register {
                 it.add(blockItem)
             }
         }

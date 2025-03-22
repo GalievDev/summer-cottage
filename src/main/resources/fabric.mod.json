@@ -31,7 +31,12 @@
     "sc.mixins.json"
   ],
   "custom": {
-    "fstats": 2
+    "fstats": 2,
+    "duckyupdater": {
+      "modrinthId": "eJ2H87hd",
+      "type": "release",
+      "featured": false
+    }
   },
   "depends": {
     "fabricloader": ">=${loaderVersion}",

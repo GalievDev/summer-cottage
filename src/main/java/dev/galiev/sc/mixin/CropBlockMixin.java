@@ -21,7 +21,8 @@ public abstract class CropBlockMixin extends PlantBlock implements Fertilizable 
 
     @Shadow public abstract void grow(ServerWorld world, Random random, BlockPos pos, BlockState state);
 
-    @Shadow protected abstract int getAge(BlockState state);
+    @Shadow
+    public abstract int getAge(BlockState state);
 
     public CropBlockMixin(Settings settings) {
         super(settings);

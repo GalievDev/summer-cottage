@@ -26,7 +26,7 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
         if (blockState?.isIn(BlockTags.DIRT) == true) {
             if (pos != null) {
                 for (targetPos in BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-                    if (world.getBlockState(targetPos.up()).isIn(BlockTags.REPLACEABLE_PLANTS)) {
+                    if (world.getBlockState(targetPos.up()).isIn(BlockTags.FLOWERS)) {
                         world.breakBlock(targetPos.up(), true)
                     }
                     if (world.getBlockState(targetPos).isIn(BlockTags.DIRT) && world.isAir(targetPos.up())) {
@@ -47,7 +47,7 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
         else if (blockState?.isIn(BlockTags.CROPS) == true) {
             if (pos != null) {
                 for (targetPos in BlockPos.iterate(pos.add(-1, 0, -1), pos.add(1, 0, 1))) {
-                    if (blockState.get((blockState.block as CropBlock).ageProperty) == CropBlock.MAX_AGE) {
+                    if ((blockState.block as CropBlock).getAge(blockState) == CropBlock.MAX_AGE) {
                         world.breakBlock(targetPos, true)
                     }
                 }

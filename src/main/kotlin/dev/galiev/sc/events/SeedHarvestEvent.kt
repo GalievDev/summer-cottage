@@ -25,7 +25,7 @@ object SeedHarvestEvent: PlayerBlockBreakEvents.After {
 
         val block = state?.block
 
-        if (block is CropBlock && state.get(block.ageProperty) == CropBlock.MAX_AGE) {
+        if (block is CropBlock && block.getAge(state) == CropBlock.MAX_AGE) {
             val helmet = player?.getEquippedStack(EquipmentSlot.HEAD)?.item
             val chest = player?.getEquippedStack(EquipmentSlot.CHEST)?.item
             val legs = player?.getEquippedStack(EquipmentSlot.LEGS)?.item

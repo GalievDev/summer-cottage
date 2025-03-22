@@ -3,8 +3,8 @@ package dev.galiev.sc.items.custom
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.helper.NbtHelper
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.minecraft.block.Blocks
 import net.minecraft.block.CropBlock
-import net.minecraft.block.Material
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -40,7 +40,7 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
         val state = world?.getBlockState(pos)
 
         if (!NbtHelper.getBoolean(stack, "Water")) {
-            if (state?.material == Material.WATER) {
+            if (state?.block == Blocks.WATER) {
                 NbtHelper.setInt(stack, "Milliliters", 1000)
                 NbtHelper.setBoolean(stack, "Water", true)
                 user?.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F)
