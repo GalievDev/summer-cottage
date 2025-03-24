@@ -14,7 +14,7 @@ base {
 }
 
 val fabricKotlinVersion: String by project
-val javaVersion = JavaVersion.VERSION_21
+val javaVersion = JavaVersion.VERSION_17
 val loaderVersion: String by project
 val yarnMappings: String by project
 val fabricVersion: String by project
@@ -61,7 +61,7 @@ tasks {
 
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 

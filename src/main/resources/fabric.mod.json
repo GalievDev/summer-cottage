@@ -42,7 +42,7 @@
     "fabricloader": ">=${loaderVersion}",
     "fabric": "*",
     "fabric-language-kotlin": ">=${fabricKotlinVersion}",
-    "minecraft": "${minecraftVersion}",
+    "minecraft": ">=${minecraftVersion}",
     "java": ">=${javaVersion}",
     "geckolib": ">=${geckolib}"
   },
