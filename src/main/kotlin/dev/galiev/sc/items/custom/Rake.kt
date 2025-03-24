@@ -17,19 +17,23 @@ import net.minecraft.util.math.BlockPos
 
 
 class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
-    override fun useOnBlock(context: ItemUsageContext?): ActionResult {
-        val world = context?.world
-        val pos = context?.blockPos
-        val blockState = world?.getBlockState(pos)
-        val player = context?.player
+    override fun useOnBlock(context: ItemUsageContext): ActionResult {
+        val world = context.world
+        val pos = context.blockPos
+        val blockState = world.getBlockState(pos)
+        val player = context.player
 
-        if (blockState?.isIn(BlockTags.DIRT) == true) {
+        if ((blockState.isOf(Blocks.DIRT) || blockState.isOf(Blocks.GRASS_BLOCK)) &&
+            (world.isAir(pos.up()) || world.getBlockState(pos.up()).isReplaceable)) {
             if (pos != null) {
-                for (targetPos in BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-                    if (world.getBlockState(targetPos.up()).isIn(BlockTags.FLOWERS)) {
+                for (targetPos in BlockPos.iterate(pos.add(-1, 0, -1), pos.add(1, 0, 1))) {
+                    val targetState = world.getBlockState(targetPos)
+
+                    if (world.getBlockState(targetPos.up()).isReplaceable) {
                         world.breakBlock(targetPos.up(), true)
                     }
-                    if (world.getBlockState(targetPos).isIn(BlockTags.DIRT) && world.isAir(targetPos.up())) {
+
+                    if ((targetState.isOf(Blocks.DIRT) || targetState.isOf(Blocks.GRASS_BLOCK)) && world.isAir(targetPos.up())) {
                         world.setBlockState(targetPos, Blocks.FARMLAND.defaultState)
                     }
                 }
@@ -37,17 +41,17 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
                 world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F)
 
                 if (!world.isClient && player != null) {
-                    context.stack.damage(1, player) { p: PlayerEntity -> p.sendToolBreakStatus(context.hand) }
+                    context.stack.damage(RANDOM.nextInt(2, 9), player) { p: PlayerEntity -> p.sendToolBreakStatus(context.hand) }
                 }
 
                 ActionResult.success(world.isClient)
             }
         }
 
-        else if (blockState?.isIn(BlockTags.CROPS) == true) {
+        else if (blockState.isIn(BlockTags.CROPS)) {
             if (pos != null) {
                 for (targetPos in BlockPos.iterate(pos.add(-1, 0, -1), pos.add(1, 0, 1))) {
-                    if ((blockState.block as CropBlock).getAge(blockState) == CropBlock.MAX_AGE) {
+                    if (world.getBlockState(targetPos).block is CropBlock && (blockState.block as CropBlock).getAge(blockState) == CropBlock.MAX_AGE) {
                         world.breakBlock(targetPos, true)
                     }
                 }
