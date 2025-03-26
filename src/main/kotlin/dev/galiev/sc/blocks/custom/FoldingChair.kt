@@ -3,7 +3,6 @@ package dev.galiev.sc.blocks.custom
 import dev.galiev.sc.blocks.custom.entity.ChairEntity
 import dev.galiev.sc.blocks.custom.entity.ChairEntity.Companion.OCCUPIED
 import dev.galiev.sc.enity.EntitiesRegistry
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
@@ -28,7 +27,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.event.GameEvent
 
-class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.5f, 3.5f).nonOpaque()) : Block(settings), Waterloggable {
+class FoldingChair(settings: Settings = Settings.create().strength(1.5f, 3.5f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
@@ -60,10 +59,10 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
         neighborPos: BlockPos?
     ): BlockState {
         if (state?.get(WATERLOGGED) == true) {
-            world?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
 
     @Deprecated("Deprecated in Java")
@@ -93,7 +92,7 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
         if (!player?.isSneaking!! && player.getStackInHand(player.activeHand).isEmpty) {
             val comparePos = Vec3d(hit?.blockPos?.x?.toDouble()!!, hit.blockPos.y.toDouble(), hit.blockPos.z.toDouble())
 
-            return spawnChair(world, player, hit.blockPos, 0.3, comparePos)
+            return spawnChair(world, player, hit.blockPos, 0.5, comparePos)
         }
         return ActionResult.PASS
     }

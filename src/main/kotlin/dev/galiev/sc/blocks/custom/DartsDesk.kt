@@ -1,6 +1,5 @@
 package dev.galiev.sc.blocks.custom
 
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -24,7 +23,7 @@ import net.minecraft.world.WorldAccess
 import java.util.stream.Stream
 
 
-class DartsDesk(settings: Settings = FabricBlockSettings.create().strength(1.0f).nonOpaque()) : Block(settings), Waterloggable {
+class DartsDesk(settings: Settings = Settings.create().strength(1.0f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
