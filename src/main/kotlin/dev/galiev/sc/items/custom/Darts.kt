@@ -2,7 +2,6 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.enity.custom.DartsEntity
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
@@ -17,14 +16,14 @@ import net.minecraft.util.UseAction
 import net.minecraft.world.World
 
 
-class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
+class Darts(settings: Settings = Settings()) : Item(settings) {
 
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
         if (user is PlayerEntity) {
-            val i = getMaxUseTime(stack) - remainingUseTicks
+            val i = getMaxUseTime(stack, user) - remainingUseTicks
             if (i >= 10) {
                 if (!world.isClient) {
-                    val darts = DartsEntity(world, user, stack)
+                    val darts = DartsEntity(world, user, stack, null)
                     darts.setVelocity(
                         user,
                         user.getPitch(),
@@ -80,7 +79,7 @@ class Darts(settings: Settings = FabricItemSettings()) : Item(settings) {
         return UseAction.SPEAR
     }
 
-    override fun getMaxUseTime(stack: ItemStack?): Int {
+    override fun getMaxUseTime(stack: ItemStack?, user: LivingEntity?): Int {
         return 92000
     }
 }

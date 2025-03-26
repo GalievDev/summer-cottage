@@ -2,10 +2,9 @@ package dev.galiev.sc.items.custom
 
 import dev.galiev.sc.SummerCottage.RANDOM
 import dev.galiev.sc.events.SeedHarvestEvent
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Blocks
 import net.minecraft.block.CropBlock
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.HoeItem
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.item.ToolMaterials
@@ -16,7 +15,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
 
 
-class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
+class Rake : HoeItem(ToolMaterials.IRON, Settings()) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos
@@ -41,7 +40,7 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
                 world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F)
 
                 if (!world.isClient && player != null) {
-                    context.stack.damage(RANDOM.nextInt(2, 9), player) { p: PlayerEntity -> p.sendToolBreakStatus(context.hand) }
+                    context.stack.damage(RANDOM.nextInt(2, 9), player, LivingEntity.getSlotForHand(context.hand))
                 }
 
                 ActionResult.success(world.isClient)
@@ -57,9 +56,7 @@ class Rake : HoeItem(ToolMaterials.IRON, 1, 1F, FabricItemSettings()) {
                 }
 
                 if (!world.isClient && player != null) {
-                    context.stack.damage(RANDOM.nextInt(2, 9), player) { p: PlayerEntity ->
-                        p.sendToolBreakStatus(context.hand)
-                    }
+                    context.stack.damage(RANDOM.nextInt(2, 9), player, LivingEntity.getSlotForHand(context.hand))
                     SeedHarvestEvent.afterBlockBreak(world, player, pos, blockState, null)
                 }
 

@@ -3,8 +3,6 @@ package dev.galiev.sc.enity
 import dev.galiev.sc.SummerCottage
 import dev.galiev.sc.blocks.custom.entity.ChairEntity
 import dev.galiev.sc.enity.custom.DartsEntity
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.Registries
@@ -15,14 +13,14 @@ object EntitiesRegistry {
     private val ENTITIES: MutableMap<EntityType<*>, Identifier> = LinkedHashMap()
 
     val DARTS_ENTITY: EntityType<DartsEntity> =
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::DartsEntity)
-            .dimensions(EntityDimensions.fixed(0.2F, 0.2F))
+        EntityType.Builder.create(::DartsEntity, SpawnGroup.MISC)
+            .dimensions(0.2F, 0.2F)
             .build()
             .create("darts")
 
     val CHAIR_ENTITY: EntityType<ChairEntity> =
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ChairEntity)
-            .dimensions(EntityDimensions.fixed(0.001F, 0.001F))
+        EntityType.Builder.create(::ChairEntity, SpawnGroup.MISC)
+            .dimensions(0.001F, 0.001F)
             .build()
             .create("chair_entity")
 
@@ -33,6 +31,6 @@ object EntitiesRegistry {
     }
 
     private fun <T : EntityType<*>> T.create(id: String): T = this.apply {
-        ENTITIES[this] = Identifier(SummerCottage.MOD_ID, id)
+        ENTITIES[this] = Identifier.of(SummerCottage.MOD_ID, id)
     }
 }

@@ -4,11 +4,9 @@ import dev.galiev.sc.enity.EntitiesRegistry
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.listener.ClientPlayPacketListener
-import net.minecraft.network.packet.Packet
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -17,10 +15,6 @@ import net.minecraft.world.World
 class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(EntitiesRegistry.CHAIR_ENTITY, world) {
     constructor(world: World?) : this(EntitiesRegistry.CHAIR_ENTITY, world) {
         noClip = true
-    }
-
-    override fun createSpawnPacket(): Packet<ClientPlayPacketListener> {
-        return EntitySpawnS2CPacket(this)
     }
 
     override fun updatePassengerForDismount(passenger: LivingEntity?): Vec3d {
@@ -38,12 +32,12 @@ class ChairEntity(type: EntityType<out Entity>?, world: World?) : Entity(Entitie
         return super.updatePassengerForDismount(passenger)
     }
 
+    override fun initDataTracker(builder: DataTracker.Builder?) {
+    }
+
     override fun remove(reason: RemovalReason?) {
         OCCUPIED.remove(pos)
         super.remove(reason)
-    }
-
-    override fun initDataTracker() {
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound?) {

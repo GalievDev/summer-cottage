@@ -2,8 +2,10 @@ package dev.galiev.sc
 
 import com.mojang.logging.LogUtils
 import dev.galiev.sc.blocks.BlocksRegistry
+import dev.galiev.sc.client.model.ModelLayers
 import dev.galiev.sc.enity.EntitiesRegistry
 import dev.galiev.sc.events.SeedHarvestEvent
+import dev.galiev.sc.helper.ComponentHelper
 import dev.galiev.sc.helper.SolsticeDay
 import dev.galiev.sc.items.ItemsRegistry
 import net.fabricmc.api.ModInitializer
@@ -38,6 +40,8 @@ object SummerCottage: ModInitializer {
         BlocksRegistry
         EntitiesRegistry
         PlayerBlockBreakEvents.AFTER.register(SeedHarvestEvent)
+        ComponentHelper
+        ModelLayers
         Registry.register(
             Registries.ITEM_GROUP,
             SUMMER_COTTAGE_KEY,
@@ -45,7 +49,6 @@ object SummerCottage: ModInitializer {
                 ItemsRegistry.WATER_CAN.asItem()?.defaultStack
             }.displayName(Text.translatable("itemGroup.sc")).build()
         )
-
         val notifiedPlayers = mutableSetOf<UUID>()
         ServerTickEvents.START_WORLD_TICK.register(ServerTickEvents.StartWorldTick { world: ServerWorld ->
             val (from, to) = SolsticeDay.SOLSTICE.getDays()

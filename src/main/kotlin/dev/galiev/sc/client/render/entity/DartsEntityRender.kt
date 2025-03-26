@@ -24,7 +24,7 @@ class DartsEntityRender(
 ) : EntityRenderer<DartsEntity>(ctx) {
 
     companion object {
-        val TEXTURE = Identifier(MOD_ID, "textures/entity/darts.png")
+        val TEXTURE: Identifier = Identifier.of(MOD_ID, "textures/entity/darts.png")
     }
 
     override fun getTexture(entity: DartsEntity?): Identifier = TEXTURE
@@ -61,11 +61,11 @@ class DartsEntityRender(
 
         val vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(
             vertexConsumers,
-            model.getLayer(getTexture(entity)),
+            model.getLayer(TEXTURE),
             false,
             false
         )
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
+        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1)
 
         matrices.pop()
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)

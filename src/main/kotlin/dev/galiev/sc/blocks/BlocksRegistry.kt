@@ -6,10 +6,10 @@ import dev.galiev.sc.blocks.custom.Couple
 import dev.galiev.sc.blocks.custom.DartsDesk
 import dev.galiev.sc.blocks.custom.FoldingChair
 import dev.galiev.sc.blocks.custom.Kettle
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -25,7 +25,7 @@ object BlocksRegistry {
 
     init {
         BLOCKS.keys.forEach {
-            val blockItem = BlockItem(it, FabricItemSettings())
+            val blockItem = BlockItem(it, Item.Settings())
             Registry.register(Registries.BLOCK, BLOCKS[it], it)
             Registry.register(Registries.ITEM, BLOCKS[it], blockItem)
             ItemGroupEvents.modifyEntriesEvent(SUMMER_COTTAGE_KEY).register {
@@ -35,6 +35,6 @@ object BlocksRegistry {
     }
 
     private fun Block.create(name: String): Block = this.apply {
-        BLOCKS[this] = Identifier(SummerCottage.MOD_ID, name)
+        BLOCKS[this] = Identifier.of(SummerCottage.MOD_ID, name)
     }
 }

@@ -7,14 +7,14 @@ import software.bernie.geckolib.model.GeoModel
 
 class FishermanClothModel: GeoModel<FishermanClothItem>() {
     override fun getModelResource(animatable: FishermanClothItem?): Identifier {
-        return Identifier(MOD_ID, "geo/fishman_armor.geo.json")
+        return Identifier.of(MOD_ID, "geo/fishman_armor.geo.json")
     }
 
     override fun getTextureResource(animatable: FishermanClothItem?): Identifier {
-        return Identifier(MOD_ID, "textures/armor/fishman_armor.png")
+        return Identifier.of(MOD_ID, "textures/armor/fishman_armor.png")
     }
 
     override fun getAnimationResource(animatable: FishermanClothItem?): Identifier {
-        return Identifier(MOD_ID, "animations/fishman_armor.animation.json")
+        return Identifier.of(MOD_ID, "animations/fishman_armor.animation.json")
     }
 }

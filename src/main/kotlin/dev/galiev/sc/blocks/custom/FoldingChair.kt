@@ -19,7 +19,6 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
-import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -81,19 +80,17 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
         builder?.add(FACING, WATERLOGGED)
     }
 
-    @Deprecated("Deprecated in Java", ReplaceWith("ActionResult.CONSUME", "net.minecraft.util.ActionResult"))
     override fun onUse(
         state: BlockState?,
         world: World?,
         pos: BlockPos?,
         player: PlayerEntity?,
-        hand: Hand?,
         hit: BlockHitResult?
     ): ActionResult {
         if (world?.isClient!!) {
             return ActionResult.PASS
         }
-        if (!player?.isSneaking!! && player.getStackInHand(hand).isEmpty) {
+        if (!player?.isSneaking!! && player.getStackInHand(player.activeHand).isEmpty) {
             val comparePos = Vec3d(hit?.blockPos?.x?.toDouble()!!, hit.blockPos.y.toDouble(), hit.blockPos.z.toDouble())
 
             return spawnChair(world, player, hit.blockPos, 0.3, comparePos)
@@ -101,7 +98,7 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
         return ActionResult.PASS
     }
 
-    override fun onBreak(world: World?, pos: BlockPos?, state: BlockState?, player: PlayerEntity?) {
+    override fun onBreak(world: World?, pos: BlockPos?, state: BlockState?, player: PlayerEntity?): BlockState? {
         if (pos != null) {
             val x = pos.x.toDouble()
             val y = pos.y.toDouble()
@@ -122,6 +119,8 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
 
             OCCUPIED.remove(Vec3d(x,y,z))
         }
+
+        return super.onBreak(world, pos, state, player)
     }
 
     private fun spawnChair(world: World?, player: PlayerEntity?, pos: BlockPos?, yOffset: Double, comparePos: Vec3d): ActionResult {

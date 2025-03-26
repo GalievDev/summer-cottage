@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -26,9 +27,9 @@ public abstract class FishingRodItemMixin {
     ), cancellable = true)
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         var stack = user.getStackInHand(hand);
-        if (isFullFisherman(user)) {
-            int luckOfSea = EnchantmentHelper.getLuckOfTheSea(stack) + 2;
-            int lure = EnchantmentHelper.getLure(stack) + 2;
+        if (isFullFisherman(user) && world instanceof ServerWorld serverWorld) {
+            int luckOfSea = EnchantmentHelper.getFishingLuckBonus(serverWorld, stack, user) + 2;
+            int lure = (int) EnchantmentHelper.getFishingTimeReduction(serverWorld, stack, user) + 2;
             world.spawnEntity(new FishingBobberEntity(user, world, luckOfSea, lure));
             cir.setReturnValue(TypedActionResult.success(stack));
         }

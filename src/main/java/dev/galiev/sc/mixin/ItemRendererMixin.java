@@ -34,13 +34,13 @@ public abstract class ItemRendererMixin {
     public BakedModel renderItem(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) ModelTransformationMode renderMode) {
         if ((renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.FIXED)) {
             if (stack.getItem() == ItemsRegistry.INSTANCE.getDARTS()) {
-                return getModels().getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "darts", "inventory"));
+                return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "darts")));
             }
             if (stack.getItem() == ItemsRegistry.INSTANCE.getWATER_CAN()) {
-                return getModels().getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "water_can", "inventory"));
+                return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "water_can")));
             }
             if (stack.getItem() == ItemsRegistry.INSTANCE.getRAKE()) {
-                return getModels().getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "rake", "inventory"));
+                return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "rake")));
             }
         }
 
@@ -54,13 +54,13 @@ public abstract class ItemRendererMixin {
     )
     public BakedModel getHeldItemModelMixin(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack) {
         if (stack.getItem() == ItemsRegistry.INSTANCE.getDARTS()) {
-            return this.models.getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "darts_3d", "inventory"));
+            return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "darts_3d")));
         }
         if (stack.getItem() == ItemsRegistry.INSTANCE.getWATER_CAN()) {
-            return this.models.getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "water_can_3d", "inventory"));
+            return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "water_can_3d")));
         }
         if (stack.getItem() == ItemsRegistry.INSTANCE.getRAKE()) {
-            return this.models.getModelManager().getModel(new ModelIdentifier(SummerCottage.MOD_ID, "rake_3d", "inventory"));
+            return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "rake_3d")));
         }
 
         return bakedModel;

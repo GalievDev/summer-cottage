@@ -18,7 +18,7 @@ class DartsEntity: PersistentProjectileEntity {
 
     constructor(entityType: EntityType<out DartsEntity?>, world: World): super(entityType, world)
 
-    constructor(world: World, owner: LivingEntity, stack: ItemStack): super(EntitiesRegistry.DARTS_ENTITY, owner, world) {
+    constructor(world: World, owner: LivingEntity, stack: ItemStack, shorFrom: ItemStack?): super(EntitiesRegistry.DARTS_ENTITY, owner, world, stack, shorFrom) {
         DEFAULT_STACK = stack.copy()
     }
 
@@ -27,6 +27,8 @@ class DartsEntity: PersistentProjectileEntity {
     override fun asItemStack(): ItemStack {
         return DEFAULT_STACK.copy()
     }
+
+    override fun getDefaultItemStack(): ItemStack = DEFAULT_STACK
 
     override fun getHitSound(): SoundEvent = SoundEvents.BLOCK_WOOD_HIT
 }
