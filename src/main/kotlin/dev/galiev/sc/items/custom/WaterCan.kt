@@ -24,11 +24,10 @@ import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 
-class WaterCan : Item(Settings().maxCount(1)) {
+class WaterCan : Item(Settings().maxCount(1).component(ComponentHelper.HAS_WATER, false).component(ComponentHelper.MILLILITERS, 0)) {
 
     override fun use(world: World, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
-        stack.set(ComponentHelper.HAS_WATER, false)
         val trace: BlockHitResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY)
 
         if (trace.type != HitResult.Type.BLOCK){
