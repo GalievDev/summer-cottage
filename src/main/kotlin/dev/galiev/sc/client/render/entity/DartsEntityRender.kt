@@ -65,7 +65,7 @@ class DartsEntityRender(
             false,
             false
         )
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1)
+        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV)
 
         matrices.pop()
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
