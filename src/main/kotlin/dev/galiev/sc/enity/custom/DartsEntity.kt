@@ -16,9 +16,9 @@ class DartsEntity: PersistentProjectileEntity {
         var DEFAULT_STACK = ItemStack(ItemsRegistry.DARTS)
     }
 
-    constructor(entityType: EntityType<out DartsEntity?>, world: World): super(entityType, world)
+    constructor(entityType: EntityType<out DartsEntity?>, world: World): super(entityType, world, DEFAULT_STACK)
 
-    constructor(world: World, owner: LivingEntity, stack: ItemStack): super(EntitiesRegistry.DARTS_ENTITY, owner, world) {
+    constructor(world: World, owner: LivingEntity, stack: ItemStack): super(EntitiesRegistry.DARTS_ENTITY, owner, world, DEFAULT_STACK) {
         DEFAULT_STACK = stack.copy()
     }
 

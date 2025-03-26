@@ -101,7 +101,7 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
         return ActionResult.PASS
     }
 
-    override fun onBreak(world: World?, pos: BlockPos?, state: BlockState?, player: PlayerEntity?) {
+    override fun onBreak(world: World?, pos: BlockPos?, state: BlockState?, player: PlayerEntity?): BlockState? {
         if (pos != null) {
             val x = pos.x.toDouble()
             val y = pos.y.toDouble()
@@ -122,6 +122,7 @@ class FoldingChair(settings: Settings = FabricBlockSettings.create().strength(1.
 
             OCCUPIED.remove(Vec3d(x,y,z))
         }
+        return state
     }
 
     private fun spawnChair(world: World?, player: PlayerEntity?, pos: BlockPos?, yOffset: Double, comparePos: Vec3d): ActionResult {

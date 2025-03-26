@@ -71,7 +71,7 @@ class WaterCan : Item(FabricItemSettings().maxCount(1)) {
 
     private fun useOnFertilizable(pos: BlockPos, world: World, stack: ItemStack): Boolean {
         val blockState = world.getBlockState(pos)
-        if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, pos, blockState, world.isClient)) {
+        if (blockState.block is CropBlock && (blockState.block as CropBlock).isFertilizable(world, pos, blockState)) {
             if (world is ServerWorld){
                 if ((blockState.block as CropBlock).canGrow(world, world.random, pos, blockState) && NbtHelper.getInt(stack, "Milliliters") >= 100) {
                     (blockState.block as CropBlock).grow(world, world.random, pos, blockState)

@@ -45,7 +45,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api", "fabric-api", fabricVersion)
 
     modImplementation("net.fabricmc", "fabric-language-kotlin", fabricKotlinVersion)
-    modImplementation("software.bernie.geckolib:geckolib-fabric-1.20.1:$geckolib")
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.20.3:$geckolib")
 
     include(modImplementation("maven.modrinth", "fstats", fstats))
     include(modImplementation("maven.modrinth", "ducky-updater-lib", duckyUpdater))
