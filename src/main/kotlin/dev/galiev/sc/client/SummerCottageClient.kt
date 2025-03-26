@@ -3,6 +3,7 @@ package dev.galiev.sc.client
 import dev.galiev.sc.blocks.custom.entity.ChairEntity
 import dev.galiev.sc.client.model.DartsEntityModel
 import dev.galiev.sc.client.model.ModelLayers
+import dev.galiev.sc.client.render.BuildInItemsRendererRegistry
 import dev.galiev.sc.client.render.entity.DartsEntityRender
 import dev.galiev.sc.enity.EntitiesRegistry
 import net.fabricmc.api.ClientModInitializer
@@ -15,6 +16,7 @@ import net.minecraft.client.render.entity.state.EntityRenderState
 
 class SummerCottageClient: ClientModInitializer {
     override fun onInitializeClient() {
+        BuildInItemsRendererRegistry
         EntityRendererRegistry.register(EntitiesRegistry.CHAIR_ENTITY, ::EmptyRenderer)
         EntityRendererRegistry.register(EntitiesRegistry.DARTS_ENTITY, ::DartsEntityRender)
         EntityModelLayerRegistry.registerModelLayer(ModelLayers.DARTS, DartsEntityModel::getTexturedModelData)

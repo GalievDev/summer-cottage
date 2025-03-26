@@ -25,7 +25,7 @@ import net.minecraft.world.tick.ScheduledTickView
 import java.util.stream.Stream
 
 
-class DartsDesk(settings: Settings = Settings.create().strength(1.0f).nonOpaque()) : Block(settings), Waterloggable {
+class DartsDesk(settings: Settings) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: EnumProperty<Direction> = Properties.HORIZONTAL_FACING

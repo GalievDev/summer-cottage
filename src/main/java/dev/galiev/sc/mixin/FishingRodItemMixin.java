@@ -8,8 +8,8 @@ import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,16 +22,16 @@ public abstract class FishingRodItemMixin {
 
     @Inject(method = "use", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
+            target = "Lnet/minecraft/entity/projectile/ProjectileEntity;spawn(Lnet/minecraft/entity/projectile/ProjectileEntity;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/projectile/ProjectileEntity;",
             shift = At.Shift.BY
     ), cancellable = true)
-    public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         var stack = user.getStackInHand(hand);
         if (isFullFisherman(user) && world instanceof ServerWorld serverWorld) {
             int luckOfSea = EnchantmentHelper.getFishingLuckBonus(serverWorld, stack, user) + 2;
             int lure = (int) EnchantmentHelper.getFishingTimeReduction(serverWorld, stack, user) + 2;
             world.spawnEntity(new FishingBobberEntity(user, world, luckOfSea, lure));
-            cir.setReturnValue(TypedActionResult.success(stack));
+            cir.setReturnValue(ActionResult.SUCCESS);
         }
     }
 

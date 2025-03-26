@@ -15,7 +15,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
 
 
-class Rake : HoeItem(ToolMaterial.IRON, 2.0F, 3.0F, Settings()) {
+class Rake(settings: Settings?) : HoeItem(ToolMaterial.IRON, 2.0F, 3.0F, settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos

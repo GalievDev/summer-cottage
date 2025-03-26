@@ -24,7 +24,7 @@ import net.minecraft.world.WorldView
 import net.minecraft.world.tick.ScheduledTickView
 import java.util.stream.Stream
 
-class Couple(settings: Settings = Settings.create().strength(1.8f).nonOpaque()): Block(settings), Waterloggable {
+class Couple(settings: Settings): Block(settings), Waterloggable {
 
     companion object {
         val FACING: EnumProperty<Direction> = Properties.HORIZONTAL_FACING

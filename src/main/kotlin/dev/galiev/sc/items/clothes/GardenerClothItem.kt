@@ -22,7 +22,9 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 
-class GardenerClothItem(type: EquipmentType) : ArmorItem(Materials.GARDENER_CLOTH_ARMOR_MATERIAL, type, Settings().maxCount(1)), GeoItem {
+class GardenerClothItem(type: EquipmentType, settings: Settings?) : ArmorItem(Materials.GARDENER_CLOTH_ARMOR_MATERIAL, type,
+    settings
+), GeoItem {
     private val cache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

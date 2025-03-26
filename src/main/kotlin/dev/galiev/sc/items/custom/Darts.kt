@@ -16,7 +16,7 @@ import net.minecraft.util.Hand
 import net.minecraft.world.World
 
 
-class Darts(settings: Settings = Settings()) : Item(settings) {
+class Darts(settings: Settings) : Item(settings) {
 
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int): Boolean {
         if (user is PlayerEntity) {

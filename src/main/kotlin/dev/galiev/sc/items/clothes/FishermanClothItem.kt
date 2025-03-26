@@ -21,7 +21,7 @@ import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class FishermanClothItem(type: EquipmentType) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMOR_MATERIAL, type, Settings().maxCount(1)), GeoItem {
+class FishermanClothItem(type: EquipmentType, settings: Settings?) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMOR_MATERIAL, type, settings), GeoItem {
     private val cache = GeckoLibUtil.createInstanceCache(this);
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

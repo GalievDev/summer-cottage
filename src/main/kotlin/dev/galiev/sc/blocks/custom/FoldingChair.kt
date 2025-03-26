@@ -30,7 +30,7 @@ import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
 import net.minecraft.world.tick.ScheduledTickView
 
-class FoldingChair(settings: Settings = Settings.create().strength(1.5f, 3.5f).nonOpaque()) : Block(settings), Waterloggable {
+class FoldingChair(settings: Settings) : Block(settings), Waterloggable {
 
     companion object {
         val FACING: EnumProperty<Direction> = Properties.HORIZONTAL_FACING
