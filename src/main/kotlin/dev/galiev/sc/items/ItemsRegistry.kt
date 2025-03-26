@@ -8,8 +8,8 @@ import dev.galiev.sc.items.custom.Darts
 import dev.galiev.sc.items.custom.Rake
 import dev.galiev.sc.items.custom.WaterCan
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
-import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
+import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -24,21 +24,21 @@ object ItemsRegistry {
 
     val DARTS = Darts().create("darts")
 
-    val GARDENER_HAT = GardenerClothItem(ArmorItem.Type.HELMET).create("gardener_hat")
+    val GARDENER_HAT = GardenerClothItem(EquipmentType.HELMET).create("gardener_hat")
 
-    val GARDENER_SHIRT = GardenerClothItem(ArmorItem.Type.CHESTPLATE).create("gardener_shirt")
+    val GARDENER_SHIRT = GardenerClothItem(EquipmentType.CHESTPLATE).create("gardener_shirt")
 
-    val GARDENER_LEGGINGS = GardenerClothItem(ArmorItem.Type.LEGGINGS).create("gardener_leggings")
+    val GARDENER_LEGGINGS = GardenerClothItem(EquipmentType.LEGGINGS).create("gardener_leggings")
 
-    val GARDENER_BOOTS = GardenerClothItem(ArmorItem.Type.BOOTS).create("gardener_boots")
+    val GARDENER_BOOTS = GardenerClothItem(EquipmentType.BOOTS).create("gardener_boots")
 
-    val FISHERMAN_HAT = FishermanClothItem(ArmorItem.Type.HELMET).create("fisherman_cap")
+    val FISHERMAN_HAT = FishermanClothItem(EquipmentType.HELMET).create("fisherman_cap")
 
-    val FISHERMAN_SHIRT = FishermanClothItem(ArmorItem.Type.CHESTPLATE).create("fisherman_shirt")
+    val FISHERMAN_SHIRT = FishermanClothItem(EquipmentType.CHESTPLATE).create("fisherman_shirt")
 
-    val FISHERMAN_LEGGINGS = FishermanClothItem(ArmorItem.Type.LEGGINGS).create("fisherman_leggings")
+    val FISHERMAN_LEGGINGS = FishermanClothItem(EquipmentType.LEGGINGS).create("fisherman_leggings")
 
-    val RUBBER_BOOTS = FishermanClothItem(ArmorItem.Type.BOOTS).create("fisherman_boots")
+    val RUBBER_BOOTS = FishermanClothItem(EquipmentType.BOOTS).create("fisherman_boots")
 
     init {
         ITEMS.keys.forEach { item ->

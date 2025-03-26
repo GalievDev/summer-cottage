@@ -4,20 +4,17 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.VertexConsumer
-import net.minecraft.client.util.math.MatrixStack
 
 
 @Environment(EnvType.CLIENT)
-class DartsEntityModel(root: ModelPart) : Model(RenderLayer::getEntitySolid) {
-    private val group: ModelPart = root.getChild("group")
+class DartsEntityModel(root: ModelPart) : Model(root, RenderLayer::getEntitySolid) {
 
     companion object {
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()
             val modelPart = modelData.root
 
-            val group = modelPart.addChild(
+            modelPart.addChild(
                 "group",
                 ModelPartBuilder.create().uv(0, 8)
                     .cuboid(0.25f, 1.5f, 3.0f, 0.0f, 1.0f, 1.5f, Dilation(0.0f))
@@ -40,9 +37,5 @@ class DartsEntityModel(root: ModelPart) : Model(RenderLayer::getEntitySolid) {
 
             return TexturedModelData.of(modelData, 16, 16)
         }
-    }
-
-    override fun render(matrices: MatrixStack?, vertices: VertexConsumer?, light: Int, overlay: Int, color: Int) {
-        group.render(matrices, vertices, light, overlay, color)
     }
 }

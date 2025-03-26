@@ -5,5 +5,5 @@ import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.util.Identifier
 
 object ModelLayers {
-    val DARTS: EntityModelLayer = EntityModelLayer(Identifier.of(MOD_ID, "darts"), "main")
+    val DARTS: EntityModelLayer = EntityModelLayer(Identifier.of(MOD_ID, "darts_3d"), "group")
 }

@@ -1,73 +1,49 @@
 package dev.galiev.sc.items.materials
 
-import dev.galiev.sc.SummerCottage
-import net.minecraft.block.Blocks
-import net.minecraft.item.ArmorItem
-import net.minecraft.item.ArmorMaterial
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.registry.entry.RegistryEntry
-import net.minecraft.sound.SoundEvent
+import dev.galiev.sc.SummerCottage.MOD_ID
+import net.minecraft.item.equipment.ArmorMaterial
+import net.minecraft.item.equipment.EquipmentAsset
+import net.minecraft.item.equipment.EquipmentAssetKeys
+import net.minecraft.item.equipment.EquipmentType
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.tag.ItemTags
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
-import java.util.function.Supplier
 
 
 object Materials {
-    val GARDENER_CLOTH_ARMOR_MATERIAL: RegistryEntry<ArmorMaterial> = registerMaterial( "gardener_cloth_material",
+    private val GARDENER_CLOTH_ARMOR_KEY: RegistryKey<EquipmentAsset> = RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(MOD_ID, "gardner_cloth_material"))
+    private val FISHERMAN_CLOTH_ARMOR_KEY: RegistryKey<EquipmentAsset> = RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(MOD_ID, "fisherman_cloth_material"))
+
+    val GARDENER_CLOTH_ARMOR_MATERIAL: ArmorMaterial = ArmorMaterial(
+        15,
         mapOf(
-            ArmorItem.Type.HELMET to 2,
-            ArmorItem.Type.CHESTPLATE to 3,
-            ArmorItem.Type.LEGGINGS to 2,
-            ArmorItem.Type.BOOTS to 1,
+            EquipmentType.HELMET to 2,
+            EquipmentType.CHESTPLATE to 3,
+            EquipmentType.LEGGINGS to 2,
+            EquipmentType.BOOTS to 1,
         ),
         5,
         SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
-        { Ingredient.ofItems(Blocks.WHITE_WOOL.asItem()) },
         0F,
-        0F
+        0F,
+        ItemTags.WOOL,
+        GARDENER_CLOTH_ARMOR_KEY
     )
 
-    val FISHERMAN_CLOTH_ARMOR_MATERIAL: RegistryEntry<ArmorMaterial> = registerMaterial( "fisherman_cloth_material",
+    val FISHERMAN_CLOTH_ARMOR_MATERIAL: ArmorMaterial = ArmorMaterial(
+        20,
         mapOf(
-            ArmorItem.Type.HELMET to 2,
-            ArmorItem.Type.CHESTPLATE to 3,
-            ArmorItem.Type.LEGGINGS to 2,
-            ArmorItem.Type.BOOTS to 1,
+            EquipmentType.HELMET to 2,
+            EquipmentType.CHESTPLATE to 3,
+            EquipmentType.LEGGINGS to 2,
+            EquipmentType.BOOTS to 1,
         ),
         5,
         SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
-        { Ingredient.ofItems(Blocks.WHITE_WOOL.asItem()) },
         0F,
-        0F
+        0F,
+        ItemTags.WOOL,
+        FISHERMAN_CLOTH_ARMOR_KEY
     )
-
-    private fun registerMaterial(
-        id: String?,
-        defensePoints: Map<ArmorItem.Type?, Int?>?,
-        enchantability: Int,
-        equipSound: RegistryEntry<SoundEvent?>?,
-        repairIngredientSupplier: Supplier<Ingredient?>?,
-        toughness: Float,
-        knockbackResistance: Float,
-    ): RegistryEntry<ArmorMaterial> {
-        val layers =
-            listOf(
-                ArmorMaterial.Layer(Identifier.of(SummerCottage.MOD_ID, id), "", false)
-            )
-
-        var material = ArmorMaterial(
-            defensePoints,
-            enchantability,
-            equipSound,
-            repairIngredientSupplier,
-            layers,
-            toughness,
-            knockbackResistance
-        )
-        material = Registry.register(Registries.ARMOR_MATERIAL, Identifier.of(SummerCottage.MOD_ID, id), material)
-
-        return RegistryEntry.of(material)
-    }
 }

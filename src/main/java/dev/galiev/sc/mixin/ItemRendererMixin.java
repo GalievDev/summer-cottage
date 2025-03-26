@@ -3,12 +3,12 @@ package dev.galiev.sc.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.galiev.sc.SummerCottage;
 import dev.galiev.sc.items.ItemsRegistry;
-import net.minecraft.client.render.item.ItemModels;
+import net.minecraft.client.data.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +34,7 @@ public abstract class ItemRendererMixin {
     public BakedModel renderItem(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) ModelTransformationMode renderMode) {
         if ((renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.FIXED)) {
             if (stack.getItem() == ItemsRegistry.INSTANCE.getDARTS()) {
-                return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "darts")));
+                return getModels().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "darts")));
             }
             if (stack.getItem() == ItemsRegistry.INSTANCE.getWATER_CAN()) {
                 return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(SummerCottage.MOD_ID, "water_can")));

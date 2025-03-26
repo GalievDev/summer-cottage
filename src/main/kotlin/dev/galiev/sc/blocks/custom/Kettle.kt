@@ -9,23 +9,25 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
-import net.minecraft.state.property.DirectionProperty
+import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.function.BooleanBiFunction
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
-import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
+import net.minecraft.world.tick.ScheduledTickView
 import java.util.stream.Stream
 
 class Kettle(settings: Settings = Settings.create().strength(1.8f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
-        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val FACING: EnumProperty<Direction> = Properties.HORIZONTAL_FACING
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
@@ -213,17 +215,19 @@ class Kettle(settings: Settings = Settings.create().strength(1.8f).nonOpaque()) 
     @Deprecated("Deprecated in Java")
     override fun getStateForNeighborUpdate(
         state: BlockState?,
-        direction: Direction?,
-        neighborState: BlockState?,
-        world: WorldAccess?,
+        world: WorldView?,
+        tickView: ScheduledTickView?,
         pos: BlockPos?,
-        neighborPos: BlockPos?
-    ): BlockState {
+        direction: Direction?,
+        neighborPos: BlockPos?,
+        neighborState: BlockState?,
+        random: Random?
+    ): BlockState? {
         if (state?.get(WATERLOGGED) == true) {
-            world?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            tickView?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Deprecated("Deprecated in Java")

@@ -7,13 +7,14 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
-import net.minecraft.state.property.DirectionProperty
+import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
@@ -23,14 +24,16 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
+import net.minecraft.world.tick.ScheduledTickView
 
 class FoldingChair(settings: Settings = Settings.create().strength(1.5f, 3.5f).nonOpaque()) : Block(settings), Waterloggable {
 
     companion object {
-        val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        val FACING: EnumProperty<Direction> = Properties.HORIZONTAL_FACING
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
@@ -52,17 +55,19 @@ class FoldingChair(settings: Settings = Settings.create().strength(1.5f, 3.5f).n
     @Deprecated("Deprecated in Java")
     override fun getStateForNeighborUpdate(
         state: BlockState?,
-        direction: Direction?,
-        neighborState: BlockState?,
-        world: WorldAccess?,
+        world: WorldView?,
+        tickView: ScheduledTickView?,
         pos: BlockPos?,
-        neighborPos: BlockPos?
-    ): BlockState {
+        direction: Direction?,
+        neighborPos: BlockPos?,
+        neighborState: BlockState?,
+        random: Random?
+    ): BlockState? {
         if (state?.get(WATERLOGGED) == true) {
-            world?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            tickView?.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
     }
 
     @Deprecated("Deprecated in Java")
@@ -123,7 +128,7 @@ class FoldingChair(settings: Settings = Settings.create().strength(1.5f, 3.5f).n
     }
 
     private fun spawnChair(world: World?, player: PlayerEntity?, pos: BlockPos?, yOffset: Double, comparePos: Vec3d): ActionResult {
-        val chair = EntitiesRegistry.CHAIR_ENTITY.create(world)
+        val chair = EntitiesRegistry.CHAIR_ENTITY.create(world, SpawnReason.TRIGGERED)
         if (chair != null) {
             val newPos = Vec3d(pos?.x!! + 0.5, pos.y + yOffset, pos.z + 0.5)
             OCCUPIED.put(comparePos, player?.blockPos!!)

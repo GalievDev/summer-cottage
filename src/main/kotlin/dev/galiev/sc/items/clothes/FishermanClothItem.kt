@@ -3,11 +3,14 @@ package dev.galiev.sc.items.clothes
 import dev.galiev.sc.items.client.FishermanClothRenderer
 import dev.galiev.sc.items.materials.Materials
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.render.entity.equipment.EquipmentModel
 import net.minecraft.client.render.entity.model.BipedEntityModel
+import net.minecraft.client.render.entity.state.BipedEntityRenderState
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ItemStack
+import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -18,7 +21,7 @@ import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class FishermanClothItem(type: Type?) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMOR_MATERIAL, type, Settings().maxCount(1)), GeoItem {
+class FishermanClothItem(type: EquipmentType) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMOR_MATERIAL, type, Settings().maxCount(1)), GeoItem {
     private val cache = GeckoLibUtil.createInstanceCache(this);
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -33,15 +36,14 @@ class FishermanClothItem(type: Type?) : ArmorItem(Materials.FISHERMAN_CLOTH_ARMO
         consumer.accept(object : GeoRenderProvider {
             var renderer: FishermanClothRenderer? = null
 
-            override fun <T : LivingEntity?> getGeoArmorRenderer(
-                livingEntity: T?,
+            override fun <E : LivingEntity?, S : BipedEntityRenderState?> getGeoArmorRenderer(
+                livingEntity: E?,
                 itemStack: ItemStack?,
                 equipmentSlot: EquipmentSlot?,
-                original: BipedEntityModel<T>?
+                type: EquipmentModel.LayerType?,
+                original: BipedEntityModel<S>?
             ): BipedEntityModel<*>? {
                 if (renderer == null) renderer = FishermanClothRenderer()
-
-                renderer!!.prepForRender(livingEntity, itemStack, equipmentSlot, original)
 
                 return renderer!!
             }

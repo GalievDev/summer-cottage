@@ -10,10 +10,10 @@ import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.render.entity.state.ProjectileEntityRenderState
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
 
@@ -21,18 +21,14 @@ import net.minecraft.util.math.RotationAxis
 class DartsEntityRender(
     ctx: EntityRendererFactory.Context,
     private val model: DartsEntityModel = DartsEntityModel(ctx.getPart(ModelLayers.DARTS))
-) : EntityRenderer<DartsEntity>(ctx) {
+) : EntityRenderer<DartsEntity, ProjectileEntityRenderState>(ctx) {
 
     companion object {
         val TEXTURE: Identifier = Identifier.of(MOD_ID, "textures/entity/darts.png")
     }
 
-    override fun getTexture(entity: DartsEntity?): Identifier = TEXTURE
-
     override fun render(
-        entity: DartsEntity,
-        yaw: Float,
-        tickDelta: Float,
+        state: ProjectileEntityRenderState,
         matrices: MatrixStack,
         vertexConsumers: VertexConsumerProvider,
         light: Int
@@ -40,26 +36,14 @@ class DartsEntityRender(
         matrices.push()
 
         matrices.multiply(
-            RotationAxis.POSITIVE_Y.rotationDegrees(
-                MathHelper.lerp(
-                    tickDelta,
-                    entity.prevYaw,
-                    entity.yaw
-                ) - 90.0f
-            )
+            RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw - 90.0f)
         )
 
         matrices.multiply(
-            RotationAxis.POSITIVE_Z.rotationDegrees(
-                MathHelper.lerp(
-                    tickDelta,
-                    entity.prevPitch,
-                    entity.pitch
-                )
-            )
+            RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch)
         )
 
-        val vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(
+        val vertexConsumer = ItemRenderer.getItemGlintConsumer(
             vertexConsumers,
             model.getLayer(TEXTURE),
             false,
@@ -68,6 +52,8 @@ class DartsEntityRender(
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV)
 
         matrices.pop()
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
+        super.render(state, matrices, vertexConsumers, light)
     }
+
+    override fun createRenderState(): ProjectileEntityRenderState = ProjectileEntityRenderState()
 }

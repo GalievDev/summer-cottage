@@ -7,7 +7,7 @@ import net.minecraft.block.CropBlock
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.HoeItem
 import net.minecraft.item.ItemUsageContext
-import net.minecraft.item.ToolMaterials
+import net.minecraft.item.ToolMaterial
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -15,7 +15,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
 
 
-class Rake : HoeItem(ToolMaterials.IRON, Settings()) {
+class Rake : HoeItem(ToolMaterial.IRON, 2.0F, 3.0F, Settings()) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos
@@ -43,7 +43,7 @@ class Rake : HoeItem(ToolMaterials.IRON, Settings()) {
                     context.stack.damage(RANDOM.nextInt(2, 9), player, LivingEntity.getSlotForHand(context.hand))
                 }
 
-                ActionResult.success(world.isClient)
+                return ActionResult.SUCCESS
             }
         }
 
@@ -60,7 +60,7 @@ class Rake : HoeItem(ToolMaterials.IRON, Settings()) {
                     SeedHarvestEvent.afterBlockBreak(world, player, pos, blockState, null)
                 }
 
-                return ActionResult.success(world.isClient)
+                return ActionResult.SUCCESS
             }
         }
 

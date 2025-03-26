@@ -7,18 +7,18 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.consume.UseAction
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.TypedActionResult
-import net.minecraft.util.UseAction
 import net.minecraft.world.World
 
 
 class Darts(settings: Settings = Settings()) : Item(settings) {
 
-    override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
+    override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int): Boolean {
         if (user is PlayerEntity) {
             val i = getMaxUseTime(stack, user) - remainingUseTicks
             if (i >= 10) {
@@ -46,16 +46,17 @@ class Darts(settings: Settings = Settings()) : Item(settings) {
                     )
                     if (!user.abilities.creativeMode) user.inventory.removeOne(stack)
                 }
-                user.itemCooldownManager[this] = 20
+                user.itemCooldownManager.set(stack, 20)
                 user.incrementStat(Stats.USED.getOrCreateStat(this))
+                return true
             }
         }
+        return false
     }
 
-    override fun use(world: World?, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack> {
-        val stack = user.getStackInHand(hand)
+    override fun use(world: World?, user: PlayerEntity, hand: Hand?): ActionResult {
         user.setCurrentHand(hand)
-        return TypedActionResult.consume(stack)
+        return ActionResult.CONSUME
     }
 
     override fun usageTick(world: World?, user: LivingEntity?, stack: ItemStack?, remainingUseTicks: Int) {

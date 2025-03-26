@@ -15,7 +15,7 @@ object ComponentHelper {
     }
 
     val HAS_WATER: ComponentType<Boolean> = register("water") { builder ->
-        builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOL)
+        builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOLEAN)
     }
 
     private fun <T> register(name: String, builderOperator: UnaryOperator<ComponentType.Builder<T>>): ComponentType<T> {

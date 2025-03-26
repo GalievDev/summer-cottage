@@ -16,7 +16,6 @@ import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
-import net.minecraft.util.TypedActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
@@ -26,13 +25,13 @@ import net.minecraft.world.WorldEvents
 
 class WaterCan : Item(Settings().maxCount(1)) {
 
-    override fun use(world: World, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack> {
+    override fun use(world: World, user: PlayerEntity, hand: Hand?): ActionResult {
         val stack = user.getStackInHand(hand)
         stack.set(ComponentHelper.HAS_WATER, false)
         val trace: BlockHitResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY)
 
         if (trace.type != HitResult.Type.BLOCK){
-            return TypedActionResult.fail(stack)
+            return ActionResult.FAIL
         }
 
         val pos = trace.blockPos
@@ -44,12 +43,12 @@ class WaterCan : Item(Settings().maxCount(1)) {
                 stack.set(ComponentHelper.HAS_WATER, true)
                 user.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F)
 
-                return TypedActionResult.success(stack)
+                return ActionResult.SUCCESS
             } else {
-                return TypedActionResult.fail(stack)
+                return ActionResult.FAIL
             }
         }
-        return TypedActionResult.fail(stack)
+        return ActionResult.FAIL
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
@@ -64,7 +63,7 @@ class WaterCan : Item(Settings().maxCount(1)) {
             if (!world?.isClient!!) {
                 world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, blockPos, 0)
             }
-            return ActionResult.success(world.isClient)
+            return ActionResult.SUCCESS
         } else return ActionResult.FAIL
     }
 

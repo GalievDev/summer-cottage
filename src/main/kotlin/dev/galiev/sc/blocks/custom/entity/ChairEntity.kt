@@ -4,9 +4,11 @@ import dev.galiev.sc.enity.EntitiesRegistry
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -42,6 +44,8 @@ class ChairEntity: Entity {
         OCCUPIED.remove(pos)
         super.remove(reason)
     }
+
+    override fun damage(world: ServerWorld?, source: DamageSource?, amount: Float): Boolean = false
 
     override fun readCustomDataFromNbt(nbt: NbtCompound?) {
     }

@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.minecraft.client.render.Frustum
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
-import net.minecraft.util.Identifier
+import net.minecraft.client.render.entity.state.EntityRenderState
 
 class SummerCottageClient: ClientModInitializer {
     override fun onInitializeClient() {
@@ -21,11 +21,10 @@ class SummerCottageClient: ClientModInitializer {
     }
 }
 
-private class EmptyRenderer(ctx: EntityRendererFactory.Context?) : EntityRenderer<ChairEntity>(ctx) {
+private class EmptyRenderer(ctx: EntityRendererFactory.Context?) : EntityRenderer<ChairEntity, EntityRenderState>(ctx) {
     override fun shouldRender(entity: ChairEntity?, frustum: Frustum?, x: Double, y: Double, z: Double): Boolean {
         return false
     }
-    override fun getTexture(entity: ChairEntity?): Identifier? {
-        return null
-    }
+
+    override fun createRenderState(): EntityRenderState = EntityRenderState()
 }
