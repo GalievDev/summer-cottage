@@ -7,11 +7,11 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:light_blue_wool"
+      "item": "minecraft:green_wool"
     }
   },
   "result": {
-    "item": "sc:gardener_shirt",
+    "id": "sc:fisherman_shirt",
     "count": 1
   }
 }

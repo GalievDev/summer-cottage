@@ -1,26 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " NN",
-    "IIN",
-    "BIC"
+    "NNN",
+    "ISI",
+    " S "
   ],
   "key": {
     "N": {
       "item": "minecraft:iron_nugget"
     },
-    "B": {
-      "item": "minecraft:bucket"
+    "S": {
+      "item": "minecraft:stick"
     },
     "I": {
       "item": "minecraft:iron_ingot"
-    },
-    "C": {
-      "item": "minecraft:cyan_dye"
     }
   },
   "result": {
-    "item": "sc:water_can",
+    "id": "sc:rake",
     "count": 1
   }
 }

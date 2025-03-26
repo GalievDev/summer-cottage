@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "NNN",
-    "ISI",
-    " S "
+    "  N",
+    "IN ",
+    "BI "
   ],
   "key": {
     "N": {
       "item": "minecraft:iron_nugget"
     },
-    "S": {
-      "item": "minecraft:stick"
+    "B": {
+      "item": "minecraft:blue_dye"
     },
     "I": {
       "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "sc:rake",
-    "count": 1
+    "id": "sc:darts",
+    "count": 4
   }
 }

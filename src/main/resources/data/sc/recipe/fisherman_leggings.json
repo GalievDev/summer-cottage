@@ -2,22 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "WWW",
-    "PSP",
-    "PWP"
+    "WWW",
+    "W W"
   ],
   "key": {
-    "S": {
-      "item": "minecraft:spruce_slab"
-    },
-    "P": {
-      "item": "minecraft:spruce_planks"
-    },
     "W": {
       "item": "minecraft:green_wool"
     }
   },
   "result": {
-    "item": "sc:folding_chair",
+    "id": "sc:fisherman_leggings",
     "count": 1
   }
 }

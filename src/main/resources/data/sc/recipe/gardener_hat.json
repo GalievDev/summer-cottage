@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "   ",
+    "WWW",
     "W W",
-    "W W"
+    "   "
   ],
   "key": {
     "W": {
-      "item": "minecraft:green_wool"
+      "item": "minecraft:wheat"
     }
   },
   "result": {
-    "item": "sc:fisherman_boots",
+    "id": "sc:gardener_hat",
     "count": 1
   }
 }

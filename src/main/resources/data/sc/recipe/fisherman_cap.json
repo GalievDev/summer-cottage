@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "WWW",
-    "WWW",
-    "W W"
+    "   ",
+    "   "
   ],
   "key": {
     "W": {
-      "item": "minecraft:green_wool"
+      "item": "minecraft:blue_wool"
     }
   },
   "result": {
-    "item": "sc:fisherman_leggings",
+    "id": "sc:fisherman_cap",
     "count": 1
   }
 }
