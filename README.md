@@ -15,6 +15,7 @@ Gardener's clothes will give you x2 drops from all crops, use the rake to plow a
 ![Gardener](https://github.com/GalievDev/summer-cottage/blob/1.21/assets/gardener.png?raw=true)
 
 Catch bigger and faster fish by wearing fisherman's clothes.
+
 ![Fisherman](https://github.com/GalievDev/summer-cottage/blob/1.21/assets/fisherman.png?raw=true)
 
 ## Solstice day
