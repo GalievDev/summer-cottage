@@ -12,7 +12,6 @@ Catch bigger and faster fish by wearing fisherman's clothes.
 
 Wait until the solstice day, which is usually in the middle of June, on this day your crops will grow much faster than usual.
 
---------------
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.в
